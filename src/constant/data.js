@@ -1,0 +1,1 @@
+export const titleApp = "3M Tourism"

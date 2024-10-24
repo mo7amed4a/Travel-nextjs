@@ -20,6 +20,9 @@ export const deepSortObjectKeys = (obj) => {
         if (obj.title) {
             sortedObj.title = obj.title;
         }
+        if (obj.titleOutSide) {
+            sortedObj.titleOutSide = obj.titleOutSide;
+        }
         if (obj.email) {
             sortedObj.email = obj.email;
         }
@@ -29,7 +32,7 @@ export const deepSortObjectKeys = (obj) => {
 
         // Sort the rest of the keys, except lastName, firstName, title, createdAt, and updatedAt
         Object.keys(obj)
-            .filter(key => key !== 'name' && key !== 'profilePhoto' && key !== 'firstName' && key !== 'lastName' && key !== 'title' && key !== 'email' && key !== 'createdAt' && key !== 'updatedAt')
+            .filter(key => key !== 'name' && key !== 'profilePhoto' && key !== 'firstName' && key !== 'lastName' && key !== 'title' && key !== 'titleOutSide' && key !== 'email' && key !== 'createdAt' && key !== 'updatedAt')
             .sort((a, b) => b.localeCompare(a))
             .forEach(key => {
                 sortedObj[key] = deepSortObjectKeys(obj[key]);

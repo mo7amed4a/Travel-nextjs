@@ -37,7 +37,7 @@ export default function PackageComponent({ packageItem }) {
                 <span>{packageItem?.duration?.day}D</span>/
                 <span>{packageItem?.duration?.nights}N</span>
               </li>
-              <li>
+              <li className="truncate hover:absolute inset-0 hover:items-center hover:flex duration-200 hover:w-full hover:bg-secondary hover:h-full hover:overflow-visible hover:whitespace-normal">
                 {/* <i className="fas fa-user-friends"></i> */}
                 {packageItem?.category}
               </li>

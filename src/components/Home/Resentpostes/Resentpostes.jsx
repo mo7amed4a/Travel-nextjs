@@ -1,15 +1,15 @@
-import React from "react";
 
-import { Link } from "react-router-dom";
-import BlogComponentApp from "../../blogs/blogsComponent";
-import useFetch from "../../../hooks/useFetch";
-import Loading from "../../global/Loading";
-import ErrorComponent from "../../global/Error";
+import BlogComponentApp from "@/components/blog/blogsComponent";
+import { Axios } from "@/lib/api/Axios";
 
-export default function Resentpostes() {
-  const { data, loading, error } = useFetch(
-    "/posts?pageNumber=1&POST_PER_PAGE=3"
-  );
+export default async function Resentpostes() {
+  let recentPosts;
+  try {
+    recentPosts = await Axios.get(`/posts?pageNumber=1&POST_PER_PAGE=3`);
+  } catch (error) {
+    console.error("Error fetching package data:", error);
+  }
+  recentPosts = recentPosts?.data?.data?.posts;
 
   return (
     <div className="mt-[100px]">
@@ -30,12 +30,9 @@ export default function Resentpostes() {
         </p>
       </div>
 
-      {loading && <Loading />}
-      {error && <ErrorComponent error={error} small />}
-      {!data && <EmptyData text="Post not found." />}
-      {data?.data?.posts && (
+       {recentPosts && (
         <div className="container-app grid grid-cols-1 md:grid-cols-3">
-          {data?.data?.posts.map((article, index) => <BlogComponentApp key={index} article={article} />)}
+          {recentPosts.map((article, index) => <BlogComponentApp key={index} article={article} />)}
         </div>
       )}
     </div>

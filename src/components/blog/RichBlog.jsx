@@ -2,12 +2,12 @@
 import { Axios, baseURL } from "@/lib/api/Axios";
 
 import { Button, FileInput, Modal } from "flowbite-react";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const RichBlog = ({ setFieldValue, description }) => {
+const RichBlog = ({ name, setFieldValue, description }) => {
   const [isOpenDelete, setIsOpenDelete] = useState(false);
   const [imageDeleteSrc, setImageDeleteSrc] = useState({
     src: null,
@@ -16,8 +16,13 @@ const RichBlog = ({ setFieldValue, description }) => {
 
   const handleChange = (html) => {
     setFieldValue("description", html);
-    localStorage.setItem('description', html)
+    if (name) {
+      localStorage.setItem(name, html);
+    }
+    loopForImage();
+  };
 
+  const loopForImage = () => {
     const images = document.querySelectorAll(".ql-editor img");
     images.forEach((img) => {
       if (!img.hasAttribute("data-click-listener")) {
@@ -62,14 +67,34 @@ const RichBlog = ({ setFieldValue, description }) => {
           [{ color: [] }, { background: [] }],
           [{ align: [] }],
           ["clean"],
+          ["addUrlImage"],
         ],
         handlers: {
           image: () => handleUploadClick(),
+          addUrlImage: () => imageUrl(), // Handler for alert icon
         },
       },
     }),
     []
   );
+  function imageUrl() {
+    if (!quillRef.current) return;
+
+    const editor = quillRef.current.getEditor();
+    const range = editor.getSelection();
+
+    const url = prompt("Please enter the url for image");
+    if (url && range) {
+      const alt = prompt("Please enter the alt for image");
+      if (alt) {
+        const imgTag = `
+          <img src="${url}" alt="${alt}" />
+        `;
+        editor.clipboard.dangerouslyPasteHTML(range.index, imgTag);
+      }
+    }
+  }
+
   function imageHandler(url = null, alt) {
     if (!quillRef.current) return;
 
@@ -102,7 +127,7 @@ const RichBlog = ({ setFieldValue, description }) => {
     try {
       const res = await Axios.post(`/ImagesPlogs`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
       });
 
@@ -115,11 +140,9 @@ const RichBlog = ({ setFieldValue, description }) => {
     }
   };
 
-
   const handelDeleteImage = async () => {
     let url = decodeURIComponent(imageDeleteSrc.src).split(baseURL);
-    url.length > 1 ? (url = url[1]) : (url = imageDeleteSrc.src)
-
+    url.length > 1 ? (url = url[1]) : (url = imageDeleteSrc.src);
     try {
       const res = await Axios.post(`/ImagesPlogs/delete`, {
         imageName: url,
@@ -130,22 +153,30 @@ const RichBlog = ({ setFieldValue, description }) => {
         removeImageFromEditor(imageDeleteSrc.id);
         setIsOpenDelete(false);
       }
-
     } catch (error) {
-      console.log(error);
-      
       toast.error(error?.response?.data?.message || "Image deleted failed.");
     }
-
   };
+
+  const addButtonToAddUrlImage = () => {
+    const button = document.querySelector(".ql-addUrlImage");
+    button.innerHTML =
+      '<svg viewBox="0 0 18 18"> <rect class="ql-stroke" height="10" width="12" x="3" y="4"></rect> <circle class="ql-fill" cx="6" cy="7" r="1"></circle> <polyline class="ql-even ql-fill" points="5 12 5 11 7 9 8 10 11 7 13 9 13 12 5 12"></polyline> </svg>'; // You can replace this with an SVG or any text
+  };
+
+  useEffect(() => {
+    loopForImage();
+    addButtonToAddUrlImage();
+  }, []);
 
   return (
     <div className="mb-6">
+      <label className="pb-1 capitalize">{name}</label>
       <ReactQuill
         className="h-[45vh] max-h-[80vh]:"
         ref={quillRef}
         theme="snow"
-        value={localStorage.getItem("description") ||description}
+        value={(name && localStorage.getItem(name)) || description}
         onChange={handleChange}
         modules={modules}
       />
@@ -166,7 +197,9 @@ const RichBlog = ({ setFieldValue, description }) => {
           <img src={imageDeleteSrc.src} alt="image" />
         </Modal.Body>
         <Modal.Footer className="flex justify-end">
-          <Button color="failure" onClick={handelDeleteImage}>Delete</Button>
+          <Button color="failure" onClick={handelDeleteImage}>
+            Delete
+          </Button>
           <Button onClick={() => setIsOpenDelete(false)}>close</Button>
         </Modal.Footer>
       </Modal>

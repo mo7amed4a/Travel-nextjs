@@ -2,8 +2,34 @@ import SubHeader from "@/components/global/sub-header";
 import SliderApp from "@/components/Home/Slider";
 import BookingForm from "@/components/packages/bookingForm";
 import { TabForPackageDetail } from "@/components/packages/TabForPackageDetail";
+import { titleApp } from "@/constant/data";
 import { Axios } from "@/lib/api/Axios";
 import { notFound } from "next/navigation";
+
+
+export async function generateMetadata({ params}) {
+  // read route params
+  const id = (await params).id
+ 
+  let data;
+  try {
+    data = await Axios.get(`/package/${id}`);
+  } catch (error) {
+    console.error("Error fetching post data:", error);
+  }
+
+  const  item  = data.data.data?.package;
+
+  return {
+    title: item.title + " | " + titleApp,
+    description: item.description,
+    keywords: item.keyword,
+    // openGraph: {
+    //   images: ['/some-specific-page-image.jpg'],
+    // },
+  }
+}
+
 
 export default async function PackagesDetailsPage({ params }) {
   const id = params.id;
@@ -13,13 +39,8 @@ export default async function PackagesDetailsPage({ params }) {
     data = await Axios.get(`/package/${id}`);
   } catch (error) {
     console.error("Error fetching package data:", error);
-    return notFound();
   }
-
-  if (!data?.data?.data?.package) {
-    return notFound();
-  }
-
+  
   const item = data.data.data.package;
 
   return (

@@ -202,7 +202,7 @@ export default function HeaderApp({ scrollPage }) {
               <ul className="text-black space-y-4">
               </ul>
             </DropdownComponent> */}
-            <Navbar.Link as={Link} href="/faq">
+            <Navbar.Link as={Link} href="/faqs">
               Faq
             </Navbar.Link>
             {!Userdata && (

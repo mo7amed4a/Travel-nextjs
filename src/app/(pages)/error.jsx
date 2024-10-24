@@ -1,6 +1,6 @@
 'use client'
+import ErrorComponent from "@/components/global/Error"
+
 export default function error({error}) {
-  return (
-    <div>error {JSON.stringify(error)}</div>
-  )
+  return <ErrorComponent error={"error"}/>
 }

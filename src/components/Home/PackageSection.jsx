@@ -1,16 +1,20 @@
-import { Link } from "next/link";
 import { Axios } from "@/lib/api/Axios";
 import { Button } from "flowbite-react";
-import PackageComponent from "../packages/packageComponent";
+import PackageComponent from "@/components/packages/packageComponent";
+import Link from "next/link";
 
 export default async function PackageSection() {
-  const {
-    data: {
-      data: { packages: data },
-    },
-  } = await Axios.get("/package?PACKAGE_PER_PAGE=1");
+  
+  let data;
+  try {
+    data = await Axios.get(`/package?PACKAGE_PER_PAGE=3&pageNumber=1`);
+  } catch (error) {
+    console.error("Error fetching package data:", error);
+  }
 
-  return data && data.length > 0 && (
+  const {packages} = data?.data?.data;
+
+  return (
     <div className="mt-[100px]">
       <div className="flex flex-col items-center justify-center text-center">
         <div className="flex items-center mb-4">
@@ -30,8 +34,7 @@ export default async function PackageSection() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-8 px-4 mx-auto  max-w-[1100px]">
-        {data
-          ?.filter((e) => e.isPin === true)
+        {packages && packages
           ?.map((item, index) => (
             <PackageComponent packageItem={item} key={index} />
           ))}

@@ -5,18 +5,10 @@ import { UserContext } from "../../../Context/Usercontext";
 import useFetch from "../../../hooks/useFetch";
 import { baseURL } from "../../../lib/api/Axios";
 import Link from "next/link";
+import LogoutApp from "@/components/header/logout/logout";
 
 export default function NavbarAdmin({ setAsideToggle }) {
   const { Userdata, setAuthorization, setUserdata } = useContext(UserContext);
-  // const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem("Userdata");
-    localStorage.removeItem("Authorization");
-    setUserdata(null);
-    setAuthorization(null);
-    // navigate("/auth/login");
-  };
 
   const {
     data: faqData,
@@ -135,7 +127,9 @@ export default function NavbarAdmin({ setAsideToggle }) {
           <Dropdown.Item as={Link} href="/">Home</Dropdown.Item>
           <Dropdown.Item as={Link} href="/profile">Profile</Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item onClick={handleLogout}>Sign out</Dropdown.Item>
+          <LogoutApp>
+                  <Dropdown.Item>Sign out</Dropdown.Item>
+                </LogoutApp>
         </Dropdown>
         <Navbar.Toggle
           className="px-3 rounded-none  block lg:hidden "

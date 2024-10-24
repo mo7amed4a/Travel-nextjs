@@ -2,11 +2,39 @@ import ShareSocial from "@/components/blog/share-social";
 import ViewBlog from "@/components/blog/ViewBlog";
 import SubHeader from "@/components/global/sub-header";
 import SliderApp from "@/components/Home/Slider";
+import { titleApp } from "@/constant/data";
 import { Axios, baseURL } from "@/lib/api/Axios";
 import { formatDate } from "@/utils/formatDate";
 import { Badge } from "flowbite-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
+export async function generateMetadata({ params, searchParams }, parent) {
+  // read route params
+  const id = (await params).id;
+
+  let data;
+  try {
+    data = await Axios.get(`/posts/${id}`);
+  } catch (error) {
+    console.error("Error fetching post data:", error);
+  }
+
+  if (!data?.data?.data?.post) {
+    return notFound();
+  }
+
+  const { post } = data.data.data;
+
+  return {
+    title: post.title + " | " + titleApp,
+    description: post.description,
+    keywords: post.tags.join(", "),
+    // openGraph: {
+    //   images: ["/some-specific-page-image.jpg"],
+    // },
+  };
+}
 
 export default async function PackagesDetailsPage({ params }) {
   const id = params.id;
@@ -16,7 +44,6 @@ export default async function PackagesDetailsPage({ params }) {
     data = await Axios.get(`/posts/${id}`);
   } catch (error) {
     console.error("Error fetching post data:", error);
-    return notFound();
   }
 
   if (!data?.data?.data?.post) {
@@ -25,19 +52,14 @@ export default async function PackagesDetailsPage({ params }) {
 
   const { post } = data.data.data;
 
-  let posts;
+  let recentPosts;
   try {
-    posts = await Axios.get(`/posts`);
+    recentPosts = await Axios.get(`posts?POST_PER_PAGE=5&pageNumber=1`);
   } catch (error) {
     console.error("Error fetching package data:", error);
-    return notFound();
   }
 
-  if (posts?.data?.data?.posts?.length === 0) {
-    return <EmptyData text="Posts is empty" />;
-  }
-
-  posts = posts.data.data.posts;
+  recentPosts = recentPosts?.data?.data?.posts;
 
   return (
     <div className="w-full">
@@ -90,8 +112,8 @@ export default async function PackagesDetailsPage({ params }) {
               Recent Post
             </h3>
             <ul className="flex flex-col gap-y-2 divide-y-2">
-              {posts &&
-                posts?.slice(0, 3).map((post, index) => (
+              {recentPosts &&
+                recentPosts?.map((post, index) => (
                   <li className="flex gap-x-2 h-20 pt-2" key={index}>
                     <figure className="">
                       <Link href={`/blogs/${post._id}`}>

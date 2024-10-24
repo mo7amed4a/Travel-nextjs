@@ -4,15 +4,13 @@ import Link from "next/link";
 import { Axios } from "@/lib/api/Axios";
 
 export default async function FooterApp() {
-  
-  let data;
+  let recentPosts;
   try {
-    data = await Axios.get(`posts`);
+    recentPosts = await Axios.get(`/posts?pageNumber=1&POST_PER_PAGE=3`);
   } catch (error) {
     console.error("Error fetching package data:", error);
   }
-
-  const { posts } = data.data.data;
+  recentPosts = recentPosts?.data?.data?.posts;
 
   return (
     <Footer bgDark container className="rounded-none mt-10">
@@ -60,7 +58,7 @@ export default async function FooterApp() {
               Latest post from blog 
             </p>
             <div className="space-y-4">
-              {posts && posts?.slice(0, 3).map((post, index) => (
+              {recentPosts && recentPosts.map((post, index) => (
                 <Link href={`/blogs/${post.id}`} key={index}>
                   <h1 className="text-sm font-semibold line-clamp-1">
                     {post.title}

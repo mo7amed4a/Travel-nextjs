@@ -91,7 +91,7 @@ export default function TableBooking({
                     .filter(([key]) => key !== "isStaff")
                     // .filter(([key]) => key !== "packageId")
                     .map(([key, value], index) => (
-                      <Table.Cell key={index}>
+                      <Table.Cell key={index} className="[&>*]:line-clamp-1">
                         {key === "select" && value === true ? (
                           <Checkbox />
                         ) : key === "avatar" ? (
@@ -119,7 +119,7 @@ export default function TableBooking({
                         ) : key === "content" ? (
                           <p className="text-sm line-clamp-1 w-24">{value}</p>
                         ) : (typeof value === "object" && value !== null) ||
-                          key === "description" ? (
+                          key === "description" || key === "keyword" || key === "descriptionOutSide"  ? (
                           <Button
                             size={"xs"}
                             color={"primary"}
