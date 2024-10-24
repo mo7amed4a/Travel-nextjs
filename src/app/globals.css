@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.container-app {
+    @apply container max-w-screen-xl mx-auto px-4
+}
+
+
+.ql-align-left {
+  text-align: left;
+}
+
+.ql-align-center {
+  text-align: center;
+}
+
+.ql-align-right {
+  text-align: right;
+}
+
+.ql-align-justify {
+  text-align: justify;
+}
+
+
+.side-link {
+    @apply rounded-none h-12  
+}
+
+body {
+    font-size: 15px;
+    color: #383838;
+    background-color: #ffffff;
+    font-family: "Open Sans", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    word-wrap: break-word;
+  }
+  @media screen and (max-width: 575px) {
+    body {
+      font-size: 14px;
+    }
+  }
+  
+/* إضافة بعض الأنماط لتحسين مظهر النموذج */
+.form-container {
+  max-width: 400px; /* تحديد أقصى عرض للنموذج */
+  margin: auto; /* توازن النموذج في الصفحة */
+  padding: 20px; /* مساحة داخلية */
+  background: rgba(255, 255, 255, 0.9); /* لون خلفية مع شفاف */
+  border-radius: 10px; /* زوايا دائرية */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ظل */
+}
+
+
+
