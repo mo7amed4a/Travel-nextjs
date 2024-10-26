@@ -15,8 +15,8 @@ import { baseURL } from "../lib/api/Axios";
 import Link from "next/link";
 import LogoutApp from "./header/logout/logout";
 
-export default function HeaderApp({ scrollPage }) {
-  const { Userdata, setUserdata, setAuthorization } = useContext(UserContext);
+export default function HeaderApp() {
+  const { Userdata } = useContext(UserContext);
   const [openModal, setOpenModal] = useState(false);
   const [searchText, setSearchText] = useState("");
 
@@ -25,17 +25,28 @@ export default function HeaderApp({ scrollPage }) {
       window.location.href = `/blogs?search=${searchText}`;
     }
   };
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div className="relative z-50">
       <MegaMenu
         className={`text-white p-0 ${
-          scrollPage
+          isScrolled
             ? "fixed top-0 inset-x-0 bg-white z-50"
             : "relative md:bg-transparent"
         }`}
       >
-        {!scrollPage && (
+        {!isScrolled && (
           <div className="container-app flex justify-between items-center text-gray-500 bg-white md:bg-transparent md:text-white">
             {/* Contact Information */}
             <ul className="flex gap-x-4 p-4">
@@ -178,8 +189,8 @@ export default function HeaderApp({ scrollPage }) {
           </div>
           <Navbar.Collapse
             className={`[&>ul]:space-x-0 [&>ul]:gap-x-4 [&>*>*>*]:uppercase [&>*>*>*]:font-bold bg-white md:bg-transparent ${
-              scrollPage
-                ? "[&>*>*>*>a]:text-black [&>*>*>*]:text-black"
+              isScrolled
+                ? "[&>*>*>*>a]:text-black [&>*>*>*]:text-black "
                 : "[&>*>*>*>a]:text-black [&>*>*>*]:text-black md:[&>*>*>*>a]:text-white md:[&>*>*>*]:text-white"
             }`}
           >
@@ -190,18 +201,18 @@ export default function HeaderApp({ scrollPage }) {
               Packages
             </Navbar.Link>
             {/* <DropdownComponent
-              ButtonLink={<LintForDropdown title={"Packages"} />}
-            >
-              <ul className="text-black space-y-4">
-              </ul>
-            </DropdownComponent> */}
+                ButtonLink={<LintForDropdown title={"Packages"} />}
+              >
+                <ul className="text-black space-y-4">
+                </ul>
+              </DropdownComponent> */}
             <Navbar.Link as={Link} href="/blogs">
               Blogs
             </Navbar.Link>
             {/* <DropdownComponent ButtonLink={<LintForDropdown title={"Blogs"} />}>
-              <ul className="text-black space-y-4">
-              </ul>
-            </DropdownComponent> */}
+                <ul className="text-black space-y-4">
+                </ul>
+              </DropdownComponent> */}
             <Navbar.Link as={Link} href="/faqs">
               Faq
             </Navbar.Link>
@@ -216,26 +227,26 @@ export default function HeaderApp({ scrollPage }) {
               </>
             )}
             {/* <DropdownComponent
-              ButtonLink={<LintForDropdown title={"more pages"} href="/" />}
-            >
-              <ul className="text-black space-y-4">
-                <Badge color={"warning"}>
-                  {"هيتم حذف اللينكات دي في الاخر"}
-                </Badge>
-                <Navbar.Link as={Link} href="/not-found">
-                  Not Found
-                </Navbar.Link>
-                <Navbar.Link as={Link} href="/auth/reset-password">
-                  Reset Password
-                </Navbar.Link>
-                <Navbar.Link as={Link} href="/auth/otp">
-                  OTP Page
-                </Navbar.Link>
-                <Navbar.Link as={Link} href="/auth/forgot-password">
-                  Forgot Password
-                </Navbar.Link>
-              </ul>
-            </DropdownComponent> */}
+                ButtonLink={<LintForDropdown title={"more pages"} href="/" />}
+              >
+                <ul className="text-black space-y-4">
+                  <Badge color={"warning"}>
+                    {"هيتم حذف اللينكات دي في الاخر"}
+                  </Badge>
+                  <Navbar.Link as={Link} href="/not-found">
+                    Not Found
+                  </Navbar.Link>
+                  <Navbar.Link as={Link} href="/auth/reset-password">
+                    Reset Password
+                  </Navbar.Link>
+                  <Navbar.Link as={Link} href="/auth/otp">
+                    OTP Page
+                  </Navbar.Link>
+                  <Navbar.Link as={Link} href="/auth/forgot-password">
+                    Forgot Password
+                  </Navbar.Link>
+                </ul>
+              </DropdownComponent> */}
           </Navbar.Collapse>
         </div>
       </MegaMenu>

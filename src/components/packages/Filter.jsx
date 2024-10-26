@@ -22,22 +22,30 @@ const CountryTypeSelector = () => {
   };
 
   const handleSubmit = () => {
-    console.log(selectedType);
-    console.log(selectedCountry);
-    router.push(`/${encodeURIComponent(selectedCountry)}/packages/${encodeURIComponent(selectedType)}`);
-    // router.push(`/${selectedCountry}/packages/${selectedType}`)
+    // Set defaults if no selection is made
+    const countryToNavigate = selectedCountry || country[0];
+    const typeToNavigate = selectedType || categories[0];
+
+    // Log for debugging
+    console.log('Country:', countryToNavigate);
+    console.log('Type:', typeToNavigate);
+
+    router.push(`/${encodeURIComponent(countryToNavigate)}/packages/${encodeURIComponent(typeToNavigate)}`);
     setModalOpen(false); 
   };
 
-  const {data} = useFetch('/package/allCategorys')
-  const {data:dataLocation} = useFetch('/location')
+  const {data} = useFetch('/package/allCategorys');
+  const {data: dataLocation} = useFetch('/location');
 
   useEffect(() => {
-    setCategories(data?.data?.categories)
-    setCountry(dataLocation?.data?.country)
+    if (data?.data?.categories) setCategories(data.data.categories);
+    if (dataLocation?.data?.country) setCountry(dataLocation.data.country);
 
-  }, [data, dataLocation])
-// console.log(data?.data?.categories);
+    // Set initial values if available
+    setSelectedCountry(dataLocation?.data?.country?.[0] || null);
+    setSelectedType(data?.data?.categories?.[0] || null);
+
+  }, [data, dataLocation]);
 
   return (
     <div className="container mx-auto max-w-[1100px] px-4 mb-10">
@@ -46,10 +54,7 @@ const CountryTypeSelector = () => {
         <IoFilterOutline className="ml-2 h-5 w-5" />
       </Button>
 
-      <Modal
-        show={modalOpen}
-        onClose={() => setModalOpen(false)}
-      >
+      <Modal show={modalOpen} onClose={() => setModalOpen(false)}>
         <Modal.Header>Filter</Modal.Header>
         <Modal.Body>
           <div className="flex flex-col space-y-4">
@@ -57,35 +62,29 @@ const CountryTypeSelector = () => {
               onChange={handleSelectCountry}
               placeholder="country"
               required
+              value={selectedCountry || ''}
             >
-              {
-                country && country.length === 1 && <option >select country</option>
-              }
-              {
-                country && country.map((item, index) => (
-                  <option key={index} value={item}>{item}</option>
-                ))
-              }
+              {country && country.length === 1 && <option>Select Country</option>}
+              {country && country.map((item, index) => (
+                <option key={index} value={item}>{item}</option>
+              ))}
             </Select>
 
             <Select
               onChange={handleSelectType}
               placeholder="package type"
               required
+              value={selectedType || ''}
             >
-              {
-                categories && categories.length === 1 && <option >select</option>
-              }
-              {
-                categories && categories.map((item, index) => (
-                  <option key={index} value={item}>{item}</option>
-                ))
-              }
+              {categories && categories.length === 1 && <option>Select Type</option>}
+              {categories && categories.map((item, index) => (
+                <option key={index} value={item}>{item}</option>
+              ))}
             </Select>
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={handleSubmit}>Sreach</Button>
+          <Button onClick={handleSubmit}>Search</Button>
           <Button color="gray" onClick={() => setModalOpen(false)}>
             Close
           </Button>
