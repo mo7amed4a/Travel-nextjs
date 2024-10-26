@@ -11,6 +11,7 @@ const RichBlog = dynamic(() => import("@/components/blog/RichBlog"), {
 });
 
 const AddBlog = () => {
+  const LocalStorageName_ = "blog description"
   const [images, setImages] = useState([]);
 
   const handleImageChange = (event) => {
@@ -36,6 +37,7 @@ const AddBlog = () => {
       // resetForm();
       setImages([]);
       toast.success("Blog added successfully");
+      localStorage.removeItem(LocalStorageName_)
     } catch (error) {
       console.error(
         "Error uploading data:",
@@ -105,7 +107,7 @@ const AddBlog = () => {
                       Description
                     </label>
                     <RichBlog
-                      name="blog description"
+                      name={LocalStorageName_}
                       setFieldValue={setFieldValue}
                       description={values.description} // تمرير القيمة
                     />

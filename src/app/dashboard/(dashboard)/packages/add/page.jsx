@@ -8,6 +8,8 @@ import toast from "react-hot-toast";
 import { Axios } from "@/lib/api/Axios";
 
 import dynamic from "next/dynamic";
+import AddLocation from "@/components/packages/AddLocation";
+import SelectLocation from "@/components/packages/SelectLocation";
 const RichBlog = dynamic(() => import("@/components/blog/RichBlog"), {
   ssr: false,
 });
@@ -41,6 +43,7 @@ const PackageSchema = Yup.object().shape({
 });
 
 export default function PackageEdit() {
+  const LocalStorageName_ = "package description"
   const [days, setDays] = useState(1); // تغيير القيمة الافتراضية
   const [nights, setNights] = useState(1); // تغيير القيمة الافتراضية
 
@@ -77,6 +80,7 @@ export default function PackageEdit() {
     try {
       const response = await Axios.post("/package", packageData);
       toast.success("Package created successfully!");
+      localStorage.removeItem(LocalStorageName_)
       resetForm();
     } catch (error) {
       console.error(error.response ? error.response.data : error.message);
@@ -86,6 +90,7 @@ export default function PackageEdit() {
 
   return (
     <div className="container mx-auto mb-5">
+      <AddLocation />
       <Formik
         initialValues={{
           title: "",
@@ -161,30 +166,19 @@ export default function PackageEdit() {
                     )}
                   </div>
 
-                  <div className="mb-10">
+                  <div className="flex flex-col mb-4">
+                    
                     <RichBlog
-                      name="package description"
+                      name={LocalStorageName_}
                       setFieldValue={setFieldValue}
                       description={values.description}
-                    />
-                  </div>
-
-                  {/* <div className="flex flex-col mb-4">
-                    <label htmlFor="description" className="mb-2">
-                      Description
-                    </label>
-                    <Field
-                      as="textarea"
-                      name="description"
-                      rows="5"
-                      className="p-2 border border-gray-300 rounded resize-none"
                     />
                     {errors.description && touched.description && (
                       <div className="text-red-500 text-sm">
                         {errors.description}
                       </div>
                     )}
-                  </div> */}
+                  </div>
 
                   <div className="grid grid-cols-2 gap-x-4 mb-4">
                     <div className="flex flex-col">
@@ -231,11 +225,7 @@ export default function PackageEdit() {
                       <label htmlFor="location" className="mb-2">
                         Location
                       </label>
-                      <Field
-                        type="text"
-                        name="location"
-                        className="p-2 border border-gray-300 rounded"
-                      />
+                      <SelectLocation setFieldValue={setFieldValue} />
                       {errors.location && touched.location && (
                         <div className="text-red-500 text-sm">
                           {errors.location}

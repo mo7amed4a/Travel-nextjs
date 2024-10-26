@@ -9,7 +9,7 @@ import {
   Navbar,
   TextInput,
 } from "flowbite-react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Context/Usercontext";
 import { baseURL } from "../lib/api/Axios";
 import Link from "next/link";

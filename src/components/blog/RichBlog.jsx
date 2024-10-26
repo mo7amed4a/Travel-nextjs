@@ -170,8 +170,10 @@ const RichBlog = ({ name, setFieldValue, description }) => {
   }, []);
 
   return (
-    <div className="mb-6">
-      <label className="pb-1 capitalize">{name}</label>
+    <div className="mb-12">
+      <div className="mb-2">
+      <label className="capitalize">{name}</label>
+      </div>
       <ReactQuill
         className="h-[45vh] max-h-[80vh]:"
         ref={quillRef}
