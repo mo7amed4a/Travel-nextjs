@@ -13,7 +13,7 @@ export default function SelectLocation ({setFieldValue}) {
   const {data:dataLocation} = useFetch('/location')
 
   useEffect(() => {
-    setCountry(dataLocation?.data?.country)
+    setCountry(dataLocation?.data?.locations)
   }, [dataLocation])
 
   return (
@@ -27,7 +27,7 @@ export default function SelectLocation ({setFieldValue}) {
         }
         {
           country && country.map((item, index) => (
-            <option key={index} value={item}>{item}</option>
+            <option key={index} value={`${item.country}-${item.city}`} className="capitalize">{item.country}, {item.city}</option>
           ))
         }
       </Select>

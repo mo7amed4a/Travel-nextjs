@@ -39,10 +39,10 @@ const CountryTypeSelector = () => {
 
   useEffect(() => {
     if (data?.data?.categories) setCategories(data.data.categories);
-    if (dataLocation?.data?.country) setCountry(dataLocation.data.country);
+    if (dataLocation?.data?.locations) setCountry(dataLocation.data.locations);
 
     // Set initial values if available
-    setSelectedCountry(dataLocation?.data?.country?.[0] || null);
+    setSelectedCountry(dataLocation?.data?.locations?.[0].country || null);
     setSelectedType(data?.data?.categories?.[0] || null);
 
   }, [data, dataLocation]);
@@ -62,11 +62,10 @@ const CountryTypeSelector = () => {
               onChange={handleSelectCountry}
               placeholder="country"
               required
-              value={selectedCountry || ''}
             >
               {country && country.length === 1 && <option>Select Country</option>}
               {country && country.map((item, index) => (
-                <option key={index} value={item}>{item}</option>
+                <option key={index} value={item.country+ '-' + item.city}>{item.country}-{item.city}</option>
               ))}
             </Select>
 

@@ -44,6 +44,7 @@ const PackageSchema = Yup.object().shape({
 
 export default function PackageEdit() {
   const LocalStorageName_ = "package description"
+  const [selectedCountry, setSelectedCountry] = useState(null);
   const [days, setDays] = useState(1); // تغيير القيمة الافتراضية
   const [nights, setNights] = useState(1); // تغيير القيمة الافتراضية
 
@@ -87,6 +88,8 @@ export default function PackageEdit() {
       toast.error("Failed to create package.");
     }
   }
+
+  
 
   return (
     <div className="container mx-auto mb-5">

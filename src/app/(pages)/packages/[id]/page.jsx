@@ -99,7 +99,7 @@ export default async function PackagesDetailsPage({ params }) {
           <TabForPackageDetail packageData={item} />
         </section>
         <div className="md:col-span-2 relative">
-          <div className="sticky top-10 space-y-10">
+          <div className="sticky top-20 space-y-10">
               {item?.typePackages?.length > 0 && (
             <div className="bg-primary py-5 flex flex-col justify-center items-center space-y-3 text-white">
                 <div className=" bg-primary p-1.5 text-white">

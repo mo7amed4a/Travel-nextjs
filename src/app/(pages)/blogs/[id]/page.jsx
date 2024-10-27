@@ -107,7 +107,7 @@ export default async function PackagesDetailsPage({ params }) {
           <ShareSocial imageUrl={baseURL + post?.image[0].url} />
         </div>
         <aside className="md:col-span-2 mt-8 relative">
-          <div className="sticky top-0">
+          <div className="sticky top-20">
             <h3 className="widget-title text-xl font-semibold mb-4">
               Recent Post
             </h3>
