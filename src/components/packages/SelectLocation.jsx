@@ -27,7 +27,7 @@ export default function SelectLocation ({setFieldValue}) {
         }
         {
           country && country.map((item, index) => (
-            <option key={index} value={`${item.country}-${item.city}`} className="capitalize">{item.country}, {item.city}</option>
+            <option key={index} value={`${item.country}-${item.city}`} className="capitalize">{item.country}-{item.city}</option>
           ))
         }
       </Select>

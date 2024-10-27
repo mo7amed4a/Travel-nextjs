@@ -65,7 +65,7 @@ const CountryTypeSelector = () => {
             >
               {country && country.length === 1 && <option>Select Country</option>}
               {country && country.map((item, index) => (
-                <option key={index} value={item.country+ '-' + item.city}>{item.country}-{item.city}</option>
+                <option key={index} value={item.country} className="capitalize">{item.country}-{item.city}</option>
               ))}
             </Select>
 
