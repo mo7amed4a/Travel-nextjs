@@ -193,7 +193,7 @@ export default function TableBooking({
                           value ? (
                             <Avatar
                               className="[&>*>img]:w-4 [&>*>img]:h-4"
-                              img={"/svgs/dashboard.svg"}
+                              img={"/svgs/admin.svg"}
                               alt="User Avatar"
                               rounded
                             />

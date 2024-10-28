@@ -16,12 +16,12 @@ export default function Users() {
     `/user?page=${currentPage}&limit=10`
   );
 
-  const posts = data?.data;
+  const users = data?.data;
 
 
 
-  const handleDeleteClick = (post) => {
-    setSelectedUser(post);
+  const handleDeleteClick = (user) => {
+    setSelectedUser(user);
     setIsModalOpenDelete(true);
   };
 
@@ -37,16 +37,16 @@ export default function Users() {
   };
 
   return (
-    posts && (
+    users && (
       <div className="w-full">
         <TableBooking
           title={"Users"}
-          values={posts}
-          Buttons={(post) => (
+          values={users}
+          Buttons={(user) => (
             <>
-              <Button color={"failure"} onClick={() => handleDeleteClick(post)}>
+             {!user?.isAdmin && <Button color={"failure"} onClick={() => handleDeleteClick(user)}>
                 Delete
-              </Button>
+              </Button>}
             </>
           )}
           description={"Users List"}
