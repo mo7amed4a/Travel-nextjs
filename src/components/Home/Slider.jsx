@@ -6,13 +6,13 @@ export default function SliderApp({
   slides = [
     {
       url: "/images/img27.jpg",
-      title: "Slide 1",
-      text: "Slide 1 text",
+      title: "EXPERIENCE THE NATURE'S BEAUTY",
+      text: "Taciti quasi, sagittis excepteur hymenaeos, id temporibus hic proident ullam, eaque donec delectus tempor consectetur nunc, purus congue? Rem volutpat sodales! Mollit. Minus exercitationem wisi.",
     },
     {
       url: "/assets/wallpaperflare.com_wallpaper2-Bsxvae_n.jpg",
-      title: "Slide 2",
-      text: "Slide 2 text",
+      title: "EXPERIENCE THE NATURE'S BEAUTY",
+      text: "Taciti quasi, sagittis excepteur hymenaeos, id temporibus hic proident ullam, eaque donec delectus tempor consectetur nunc, purus congue? Rem volutpat sodales! Mollit. Minus exercitationem wisi.",
     },
   ],
   size,
@@ -44,7 +44,7 @@ export default function SliderApp({
                     {slide.title}
                   </span>
                 </h1>
-                <p className="text-white text-2xl mb-9">{slide.text}</p>
+                <p className="text-white text-2xl mb-9 w-5/6 md:w-2/3">{slide.text}</p>
                 <button className="bg-sky-700 text-white px-8 py-3 hover:bg-sky-900">
                   CONTINUE READING
                 </button>
