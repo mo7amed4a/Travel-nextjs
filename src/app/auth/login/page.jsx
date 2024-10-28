@@ -6,11 +6,9 @@ import { Axios } from "@/lib/api/Axios";
 import toast from "react-hot-toast";
 import { UserContext } from "@/Context/Usercontext";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import Cookies from 'js-cookie';
 
 export default function LoginPage() {
-    const router = useRouter();
     const { setAuthorization, setUserdata } = useContext(UserContext);
     const [errorMessage, setErrorMessage] = useState("");
 

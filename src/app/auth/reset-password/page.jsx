@@ -35,7 +35,7 @@ export default function ResetPasswordPage() {
           confirmPassword: values.confirmPassword,
         });
         if (response.data.status === "success") {
-          Router.push("/auth/login");
+          router.push("/auth/login");
           toast.success(response?.data?.message);
         } else {
           toast.error(response?.data?.message);

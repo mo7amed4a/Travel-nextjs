@@ -2,13 +2,12 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Axios, baseURL } from "@/lib/api/Axios";
+import { Axios } from "@/lib/api/Axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
 export default function SignUpPage() {
-  let navigate = useRouter();
-
+  const router = useRouter()
   const validationSchema = Yup.object({
     firstName: Yup.string().required("First Name is required"),
     lastName: Yup.string().required("Last Name is required"),
@@ -36,7 +35,7 @@ export default function SignUpPage() {
       try {
         const response = await Axios.post(`/auth/register`, values);
         if (response.data.status === "SUCCESS") {
-          navigate("/auth/login");
+          router.push("/auth/login");
           toast.success(response?.data?.message);
         } else {
           toast.error(response?.data?.message);

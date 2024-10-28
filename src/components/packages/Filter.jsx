@@ -42,12 +42,12 @@ const CountryTypeSelector = () => {
     if (dataLocation?.data?.locations) setCountry(dataLocation.data.locations);
 
     // Set initial values if available
-    setSelectedCountry(dataLocation?.data?.locations?.[0].country || null);
+    setSelectedCountry(dataLocation?.data?.locations?.[0]?.country || null);
     setSelectedType(data?.data?.categories?.[0] || null);
 
   }, [data, dataLocation]);
 
-  return (
+  return country && country.length > 0 && categories && categories.length > 0 && (
     <div className="container mx-auto max-w-[1100px] px-4 mb-10">
       <Button onClick={() => setModalOpen(true)}>
         Filter Packages

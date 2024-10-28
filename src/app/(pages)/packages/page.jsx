@@ -41,7 +41,7 @@ export default async function PackagesPage({ searchParams }) {
 
   // const SectionData = sub_header?.data?.data?.sections[0]
 
-  return (
+  return packages &&(
     <div>
       <SubHeader title="Packages" desc="Packages page" />
       {/* {SectionData && <SubHeader title={SectionData?.title} desc={SectionData?.content} 
