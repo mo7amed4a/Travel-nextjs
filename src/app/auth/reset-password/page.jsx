@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { Axios } from "@/lib/api/Axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 export default function ResetPasswordPage() {
   const router = useRouter()
   const validationSchema = Yup.object({

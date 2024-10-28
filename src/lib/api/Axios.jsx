@@ -2,7 +2,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 // import { cookies } from "next/headers";
 
-export const baseURL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8000"; 
+export const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL; 
+console.log("baseURL22", baseURL);
 
 export const Axios = axios.create({
     baseURL: baseURL + '/api/v1',

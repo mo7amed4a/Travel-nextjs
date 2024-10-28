@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { Axios, baseURL } from "@/lib/api/Axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import toast from "react-hot-toast";
 export default function SignUpPage() {
   let navigate = useRouter();
 
@@ -35,7 +36,7 @@ export default function SignUpPage() {
       try {
         const response = await Axios.post(`/auth/register`, values);
         if (response.data.status === "SUCCESS") {
-          router.push("/auth/login");
+          navigate("/auth/login");
           toast.success(response?.data?.message);
         } else {
           toast.error(response?.data?.message);
