@@ -11,13 +11,13 @@ export default async function FaqPage({ searchParams }) {
   try {
     data = await Axios.get(
       `/faq/answer?page=${page || 1}&limit=${limit || 10}`
-    );
+    );    
   } catch (error) {
     console.error("Error fetching package data:", error);
   }
 
-  const { totalPages } = data?.data;
-  const { faqs } = data?.data?.data;
+  const totalPages = data?.data?.totalPages;
+  const faqs  = data?.data?.data?.faqs;
 
   return (
     <div className="-mt-36">
@@ -46,7 +46,7 @@ export default async function FaqPage({ searchParams }) {
               placeat.
             </p>
           </section>
-          {
+          { faqs &&
             faqs?.length === 0 ? (
               <EmptyData text="Faq is empty" /> 
             ) : 
