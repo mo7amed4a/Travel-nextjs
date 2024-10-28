@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
         <html lang="en">
           <head>
             <meta charSet="UTF-8" />
-            <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+            <link rel="icon" href="/favicon.ico" />
             <meta
               name="viewport"
               content="width=device-width, initial-scale=1.0"
