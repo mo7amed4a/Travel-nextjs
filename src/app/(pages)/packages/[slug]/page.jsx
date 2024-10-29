@@ -4,16 +4,15 @@ import BookingForm from "@/components/packages/bookingForm";
 import { TabForPackageDetail } from "@/components/packages/TabForPackageDetail";
 import { titleApp } from "@/constant/data";
 import { Axios } from "@/lib/api/Axios";
-import { notFound } from "next/navigation";
 
 
 export async function generateMetadata({ params}) {
   // read route params
-  const id = (await params).id
+  const slug = (await params).slug
  
   let data;
   try {
-    data = await Axios.get(`/package/${id}`);
+    data = await Axios.get(`/package/${slug}`);
   } catch (error) {
     console.error("Error fetching post data:", error);
   }
@@ -32,11 +31,11 @@ export async function generateMetadata({ params}) {
 
 
 export default async function PackagesDetailsPage({ params }) {
-  const id = params.id;
+  const slug = params?.slug;
 
   let data;
   try {
-    data = await Axios.get(`/package/${id}`);
+    data = await Axios.get(`/package/${slug}`);
   } catch (error) {
     console.error("Error fetching package data:", error);
   }

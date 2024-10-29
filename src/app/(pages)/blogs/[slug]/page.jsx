@@ -11,11 +11,11 @@ import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params, searchParams }, parent) {
   // read route params
-  const id = (await params).id;
+  const slug = (await params).slug;
 
   let data;
   try {
-    data = await Axios.get(`/posts/${id}`);
+    data = await Axios.get(`/posts/${slug}`);
   } catch (error) {
     console.error("Error fetching post data:", error);
   }
@@ -37,11 +37,11 @@ export async function generateMetadata({ params, searchParams }, parent) {
 }
 
 export default async function PackagesDetailsPage({ params }) {
-  const id = params.id;
+  const slug = params.slug;
 
   let data;
   try {
-    data = await Axios.get(`/posts/${id}`);
+    data = await Axios.get(`/posts/${slug}`);
   } catch (error) {
     console.error("Error fetching post data:", error);
   }
@@ -116,7 +116,7 @@ export default async function PackagesDetailsPage({ params }) {
                 recentPosts?.map((post, index) => (
                   <li className="flex gap-x-2 h-20 pt-2" key={index}>
                     <figure className="">
-                      <Link href={`/blogs/${post._id}`}>
+                      <Link href={`/blogs/${post.slug}`}>
                         <img
                           className="rounded-lg w-32 h-full"
                           src={
@@ -129,7 +129,7 @@ export default async function PackagesDetailsPage({ params }) {
                     <div className="flex flex-col justify-around w-full">
                       <h5 className="">
                         <Link
-                          href={`/blogs/${post._id}`}
+                          href={`/blogs/${post.slug}`}
                           className="text-gray-800 hover:text-secondary"
                         >
                           {post.title}

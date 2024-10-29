@@ -70,7 +70,7 @@ export default function TableBooking({
                 .filter((key) => key !== "passwordResetToken")
                 .filter((key) => key !== "passwordResetTokenExpire")
                 .filter((key) => key !== "isStaff")
-                // .filter((key) => key !== "packageId")
+                .filter((key) => key !== "slug")
                 .map((key, index) => (
                   <Table.HeadCell key={index}>{key}</Table.HeadCell>
                 ))}
@@ -89,7 +89,7 @@ export default function TableBooking({
                     .filter(([key]) => key !== "passwordResetToken")
                     .filter(([key]) => key !== "passwordResetTokenExpire")
                     .filter(([key]) => key !== "isStaff")
-                    // .filter(([key]) => key !== "packageId")
+                    .filter(([key]) => key !== "slug")
                     .map(([key, value], index) => (
                       <Table.Cell key={index} className="[&>*]:line-clamp-1">
                         {key === "select" && value === true ? (

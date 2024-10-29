@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card } from "flowbite-react";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
@@ -11,6 +11,7 @@ import dynamic from "next/dynamic";
 import AddLocation from "@/components/packages/AddLocation";
 import SelectLocation from "@/components/packages/SelectLocation";
 import Link from "next/link";
+import { titleToSlug } from "@/utils/title";
 const RichBlog = dynamic(() => import("@/components/blog/RichBlog"), {
   ssr: false,
 });
@@ -64,6 +65,7 @@ export default function PackageEdit() {
       titleOutSide: values.titleOutSide,
       descriptionOutSide: values.descriptionOutSide,
       title: values.title,
+      slug: titleToSlug(values.slug),
       description: values.description,
       duration: {
         day: days,
@@ -102,6 +104,7 @@ export default function PackageEdit() {
         initialValues={{
           title: "",
           titleOutSide: "",
+          slug: "",
           descriptionOutSide: "",
           description: "",
           duration: {
@@ -119,8 +122,13 @@ export default function PackageEdit() {
         }}
         validationSchema={PackageSchema}
         onSubmit={addPackage}
+        
       >
-        {({ values, setFieldValue, errors, touched }) => (
+        {({ values, setFieldValue, errors, touched }) => {
+          useEffect(() => {
+            setFieldValue("slug", titleToSlug(values.title))
+          }, [values.title, setFieldValue]); 
+          return(
           <Form className="grid lg:grid-cols-6 gap-6 mt-9">
             <section className="w-full lg:col-span-full">
               <Card>
@@ -166,6 +174,21 @@ export default function PackageEdit() {
                     <Field
                       type="text"
                       name="title"
+                      className="p-2 border border-gray-300 rounded"
+                    />
+                    {errors.title && touched.title && (
+                      <div className="text-red-500 text-sm">{errors.title}</div>
+                    )}
+                  </div>
+
+                  <div className="flex flex-col mb-4">
+                    <label htmlFor="title" className="mb-2">
+                      Url
+                    </label>
+                    <Field
+                      type="text"
+                      name="slug"
+                      value={values.slug}
                       className="p-2 border border-gray-300 rounded"
                     />
                     {errors.title && touched.title && (
@@ -408,7 +431,7 @@ export default function PackageEdit() {
               </Card>
             </section>
           </Form>
-        )}
+        )}}
       </Formik>
     </div>
   );

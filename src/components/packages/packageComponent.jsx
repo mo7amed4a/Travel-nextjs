@@ -13,7 +13,7 @@ export default function PackageComponent({ packageItem }) {
               / {packageItem?.typePackages?.length > 0 && packageItem?.typePackages[0]?.pricing[0]?.numUser}
             </h6>
           </div>}
-          <Link href={`/packages/${packageItem._id}`}>
+          <Link href={`/packages/${packageItem.slug}`}>
             {packageItem?.image?.length != 0 ? (
               packageItem?.image?.length >= 1 && (
                 <img

@@ -219,7 +219,7 @@ export default function PackageDashboard() {
       
 
       setReload((prev) => !prev);
-      setIsModalOpenMultiImages(false); // إغلاق نافذة رفع الصور المتعددة
+      setIsModalOpenMultiImages(false);
       toast.success("Images uploaded successfully");
     } catch (error) {
       toast.error(error?.response?.data?.message || "Multi-image upload failed.");

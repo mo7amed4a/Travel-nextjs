@@ -9,7 +9,7 @@ export default function BlogComponentApp({ article }) {
   return (
     <article className="p-4 w-full">
       <figure className="w-full h-[240px] bg-gray-200">
-        <Link href={`/blogs/${article._id}`}>
+        <Link href={`/blogs/${article.slug}`}>
           <Image width={600} height={400}
             className="w-full h-full object-center"
             src={baseURL + article.image[0].url || "/images/default.jpg"} // صورة افتراضية إذا لم تكن الصورة موجودة
@@ -19,7 +19,7 @@ export default function BlogComponentApp({ article }) {
       </figure>
       <div className="flex flex-col gap-y-2">
         <h3 className="text-xl hover:text-secondary">
-          <Link href={`/blogs/${article._id}`}>{article.titleOutSide}</Link>
+          <Link href={`/blogs/${article.slug}`}>{article.titleOutSide}</Link>
         </h3>
         <div className="flex gap-x-4 text-sm text-gray-500">
           <span className="hover:text-secondary">
@@ -30,7 +30,7 @@ export default function BlogComponentApp({ article }) {
           {article.descriptionOutSide || "No description available."}
         </p>
         <Link
-          href={`/blogs/${article._id}`}
+          href={`/blogs/${article.slug}`}
           className="text-secondary font-semibold"
         >
           CONTINUE READING...

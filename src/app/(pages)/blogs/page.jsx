@@ -75,7 +75,7 @@ export default async function BlogsPage({ searchParams }) {
                 recentPosts?.map((post, index) => (
                   <li className="flex gap-x-2 h-20 pt-2" key={index}>
                     <figure className="">
-                      <Link href={`/blogs/${post._id}`}>
+                      <Link href={`/blogs/${post.slug}`}>
                         <img
                           className="rounded-lg w-32 h-full"
                           src={
@@ -88,7 +88,7 @@ export default async function BlogsPage({ searchParams }) {
                     <div className="flex flex-col justify-around w-full">
                       <h5 className="">
                         <Link
-                          href={`/blogs/${post._id}`}
+                          href={`/blogs/${post.slug}`}
                           className="text-gray-800 hover:text-secondary"
                         >
                           {post.title}
