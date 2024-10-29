@@ -31,8 +31,8 @@ export default function AddLocation() {
 
   return (
     <>
-      <div onClick={() => setOpenModal(true)} className="flex justify-end -mb-5 -mt-1">
-        <Button color="primary">Add Location</Button>
+      <div>
+        <Button onClick={() => setOpenModal(true)} color="primary">Add Location</Button>
       </div>
       <Modal
         dismissible

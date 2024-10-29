@@ -52,6 +52,12 @@ export default function SidenavAdmin({ asideToggle, setAsideToggle }) {
                 >
                   New package
                 </Sidebar.Item>
+                <Sidebar.Item
+                as={Link} href="/dashboard/packages/locations" 
+                  className="side-link hover:bg-gray-300/20"
+                >
+                  All Locations
+                </Sidebar.Item>
               </Sidebar.Collapse>
               <Sidebar.Collapse
                 label="Blogs"

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Card } from "flowbite-react";
+import { Button, Card } from "flowbite-react";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
@@ -10,6 +10,7 @@ import { Axios } from "@/lib/api/Axios";
 import dynamic from "next/dynamic";
 import AddLocation from "@/components/packages/AddLocation";
 import SelectLocation from "@/components/packages/SelectLocation";
+import Link from "next/link";
 const RichBlog = dynamic(() => import("@/components/blog/RichBlog"), {
   ssr: false,
 });
@@ -45,8 +46,8 @@ const PackageSchema = Yup.object().shape({
 export default function PackageEdit() {
   const LocalStorageName_ = "package description"
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [days, setDays] = useState(1); // تغيير القيمة الافتراضية
-  const [nights, setNights] = useState(1); // تغيير القيمة الافتراضية
+  const [days, setDays] = useState(1);
+  const [nights, setNights] = useState(1);
 
   const handleDaysChange = (e) => {
     const daysValue = parseInt(e.target.value, 10) || 0;
@@ -93,7 +94,10 @@ export default function PackageEdit() {
 
   return (
     <div className="container mx-auto mb-5">
-      <AddLocation />
+      <div className="flex justify-end gap-x-5 -mb-4">
+        <Button as={Link} href="/dashboard/packages/locations" color="light">Locations</Button>
+        <AddLocation />
+      </div>
       <Formik
         initialValues={{
           title: "",
