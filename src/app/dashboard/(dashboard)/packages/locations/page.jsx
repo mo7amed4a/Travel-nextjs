@@ -37,7 +37,7 @@ export default function locations() {
         });
         setReload((prev) => !prev);
         setIsModalOpen(false);
-        toast.success("Answer edited successfully");
+        toast.success("Location edited successfully");
       } catch (error) {
         toast.error(error?.response?.data?.message);
     }

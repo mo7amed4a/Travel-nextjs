@@ -240,7 +240,7 @@ export default function PackageDashboard() {
                   Pinned
                 </Button>
               ) : (
-                <Button onClick={() => togglePinPackageClick(package_)}>Unpin</Button>
+                <Button onClick={() => togglePinPackageClick(package_)}>pin</Button>
               )}
               <Button onClick={() => handleEditClick(package_)}>Edit</Button>
               <Button onClick={() => handleAddTypeClick(package_)}>Type+</Button>
