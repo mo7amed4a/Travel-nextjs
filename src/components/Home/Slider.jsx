@@ -2,7 +2,7 @@ import { baseURL } from "@/lib/api/Axios";
 import { Carousel } from "flowbite-react";
 import Image from "next/image";
 
-export default function SliderApp({
+export default async function SliderApp({
   slides = [
     {
       url: "/images/img27.jpg",

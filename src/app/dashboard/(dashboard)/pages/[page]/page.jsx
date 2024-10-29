@@ -62,9 +62,9 @@ export default function Pages({ params }) {
             values={sections}
             Buttons={(item) => (
               <>
-                <Button color="failure" onClick={() => handleDeleteClick(item)}>
+                {/* <Button color="failure" onClick={() => handleDeleteClick(item)}>
                   <AiOutlineDelete className="mr-2" /> Delete
-                </Button>
+                </Button> */}
                 <Button as={Link} href={`${page}/edit/${item._id}`}>
                   Edit
                 </Button>

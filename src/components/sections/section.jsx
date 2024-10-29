@@ -33,9 +33,10 @@ export default function SectionComponents() {
   };
 
   const validationSchema = Yup.object({
-    title: Yup.string().required("العنوان مطلوب"),
-    content: Yup.string().required("المحتوى مطلوب"),
-    order: Yup.number().required("الترتيب مطلوب"),
+    page: Yup.string().required("Page is required"),
+    title: Yup.string().required("Title is required"),
+    content: Yup.string().required("Content is required"),
+    order: Yup.number().required("Order is required"),
   });
 
   const handleSubmit = async (values, { setSubmitting }) => {
@@ -44,7 +45,6 @@ export default function SectionComponents() {
     formData.append("content", values.content);
     formData.append("order", values.order);
 
-    // Ensure images array is handled properly
     if (images.length > 0) {
       (images || []).forEach((image, index) => {
         formData.append(`images`, image.file);
@@ -52,7 +52,6 @@ export default function SectionComponents() {
       });
     }
 
-    // Ensure links array is handled properly
     if (links.length > 0) {
       (links || []).forEach((link, index) => {
         formData.append(`links[${index}][label]`, link.label);
@@ -60,16 +59,8 @@ export default function SectionComponents() {
       });
     }
 
-    console.log("Submitted values: ", {
-      title: values.title,
-      content: values.content,
-      order: values.order,
-      images,
-      links,
-    });
-
     try {
-      const response = await Axios.post(`/pages/packages/sections`, formData);
+      const response = await Axios.post(`/pages/${values.page}/sections`, formData);
       toast.success("Submission successful");
     } catch (error) {
       const errorMsg = error.response
@@ -85,6 +76,7 @@ export default function SectionComponents() {
     <div>
       <Formik
         initialValues={{
+          page: "",
           title: "",
           content: "",
           order: 1,
@@ -93,16 +85,29 @@ export default function SectionComponents() {
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
-          <div className="md:w-2/4 flex flex-col space-y-10 items-center">
+          <div className="flex flex-col space-y-10 items-center">
             <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-gray-500">
               Section Form
             </h2>
             <Form className="grid grid-cols-1 gap-4 w-full p-6 bg-white shadow-lg rounded-lg">
               <div className="flex flex-col gap-4">
                 <Field
+                  name="page"
+                  as={TextInput}
+                  placeholder="Page"
+                  sizing="lg"
+                  className="text-right"
+                />
+                <ErrorMessage
+                  name="page"
+                  component="div"
+                  className="text-red-500 text-sm"
+                />
+
+                <Field
                   name="title"
                   as={TextInput}
-                  placeholder="العنوان"
+                  placeholder="Title"
                   sizing="lg"
                   className="text-right"
                 />
@@ -115,7 +120,7 @@ export default function SectionComponents() {
                 <Field
                   name="content"
                   as={TextInput}
-                  placeholder="المحتوى"
+                  placeholder="Content"
                   sizing="lg"
                   className="text-right"
                 />
@@ -129,7 +134,7 @@ export default function SectionComponents() {
                   name="order"
                   type="number"
                   as={TextInput}
-                  placeholder="الترتيب"
+                  placeholder="Order"
                   sizing="lg"
                   className="text-right"
                 />
@@ -154,9 +159,9 @@ export default function SectionComponents() {
                 {/* Dynamic Description Inputs Based on Images */}
                 {(images || []).map((image, index) => (
                   <div key={index} className="flex flex-col gap-2">
-                    <Label value={`وصف الصورة ${index + 1}`} />
+                    <Label value={`Image Description ${index + 1}`} />
                     <TextInput
-                      placeholder="وصف الصورة"
+                      placeholder="Image Description"
                       value={image.description}
                       onChange={(e) =>
                         handleDescriptionChange(index, e.target.value)
@@ -168,16 +173,16 @@ export default function SectionComponents() {
                 {/* Link Fields */}
                 {(links || []).map((link, index) => (
                   <div key={index} className="flex flex-col gap-2">
-                    <Label value={`الرابط ${index + 1}`} />
+                    <Label value={`Link ${index + 1}`} />
                     <TextInput
-                      placeholder="وصف الرابط"
+                      placeholder="Link Description"
                       value={link.label}
                       onChange={(e) =>
                         handleLinkChange(index, "label", e.target.value)
                       }
                     />
                     <TextInput
-                      placeholder="الرابط"
+                      placeholder="Link URL"
                       value={link.url}
                       onChange={(e) =>
                         handleLinkChange(index, "url", e.target.value)
@@ -190,7 +195,7 @@ export default function SectionComponents() {
                   onClick={addLinkField}
                   className="w-full py-2 bg-blue-500 text-white"
                 >
-                  أضف رابط آخر
+                  Add Another Link
                 </Button>
               </div>
 
@@ -201,7 +206,7 @@ export default function SectionComponents() {
                   className="w-full font-bold py-3 text-white bg-green-600"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "جاري الإرسال..." : "إرسال"}
+                  {isSubmitting ? "Submitting..." : "Submit"}
                 </Button>
               </div>
             </Form>

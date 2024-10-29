@@ -1,11 +1,23 @@
-import { Axios } from "@/lib/api/Axios";
+import { Axios, baseURL } from "@/lib/api/Axios";
 import PaginationApp from "@/components/global/pagination";
 import FaqForm from "@/components/faqs/faqForm";
 import EmptyData from "@/components/global/empty";
 import AccordionPanelApp from "@/components/faqs/AccordionPanelApp";
+import SubHeader from "@/components/global/sub-header";
 
 export default async function FaqPage({ searchParams }) {
   const { page, limit } = searchParams;
+
+
+  let section;
+  try {
+    section = await Axios.get(`/pages/faqs/sections`);
+  } catch (error) {
+    console.error("Error fetching faqs data:", error);
+  }
+
+  section = section?.data?.data?.sections[0];
+  
 
   let data;
   try {
@@ -13,7 +25,7 @@ export default async function FaqPage({ searchParams }) {
       `/faq/answer?page=${page || 1}&limit=${limit || 10}`
     );    
   } catch (error) {
-    console.error("Error fetching package data:", error);
+    console.error("Error fetching faqs data:", error);
   }
 
   const totalPages = data?.data?.totalPages;
@@ -21,14 +33,13 @@ export default async function FaqPage({ searchParams }) {
 
   return (
     <div className="-mt-36">
-      <div
-        className="bg-[#555555] h-[50vh] object-cover bg-no-repeat bg-bottom flex justify-center items-center text-white font-bold"
-        style={{
-          backgroundImage: "url(/images/slider-pattern.png)",
-        }}
-      >
-        <h1 className="text-5xl">Faq</h1>
-      </div>
+      {section && section?.title && (
+          <SubHeader
+            title={section?.title}
+            desc={section?.content}
+            img={baseURL + section?.images[0]?.url}
+          />
+        )}
       <section className="container-app w-full grid grid-cols-1 md:grid-cols-5 gap-10">
         <div className="w-full space-y-10 md:col-span-3">
           <section className="flex flex-col justify-center items-start space-y-4 bg-gray-100 p-4">

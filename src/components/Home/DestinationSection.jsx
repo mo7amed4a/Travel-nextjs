@@ -1,5 +1,18 @@
+import { Axios, baseURL } from "@/lib/api/Axios";
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
-export default function DestinationSection() {
+export default async function DestinationSection() {
+  
+  let data;
+  try {
+    data = await Axios.get(`/package?PACKAGE_PER_PAGE=4&pageNumber=1`);
+  } catch (error) {
+    console.error("Error fetching package data:", error);
+  }
+
+  const {packages} = data?.data?.data;
+
   return (
     <>
       <div
@@ -35,104 +48,37 @@ export default function DestinationSection() {
           </div>
         </div>
 
-        <div className="grid grid-cols-12 gap-6">
-          {/* عنصر الصورة الأول */}
-          <div
-            className="col-span-6 md:col-span-3 bg-blue-500 text-white shadow-lg overflow-hidden flex items-end relative"
-            style={{
-              backgroundImage: `url(${"/images/wallll2.jpg"})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              height: "490px",
-              border: "8px white solid",
-            }}
-          >
-            {/* الطبقة الشفافة الداكنة */}
-            <div className="absolute inset-0 bg-black opacity-50"></div>
-            <div className="p-4 relative z-10">
-              <span className="bg-blue-600 text-white px-2 py-1 rounded">
-                THAILAND
-              </span>
-              <h3 className="mt-2 text-lg font-semibold">Disney Land</h3>
-              <div className="flex mt-2">⭐⭐⭐⭐⭐</div>
-            </div>
-          </div>
+       {packages && packages?.length > 0 && 
+       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 container max-w-7xl mx-auto">
 
-          {/* عنصر الصورة الثاني */}
-          <div
-            className="col-span-6 md:col-span-3 bg-red-500 text-white shadow-lg overflow-hidden flex items-end relative"
-            style={{
-              backgroundImage: `url(${"/images/wallll2.jpg"})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              height: "490px",
-              border: "8px white solid",
-            }}
-          >
-            {/* الطبقة الشفافة الداكنة */}
-            <div className="absolute inset-0 bg-black opacity-50"></div>
-            <div className="p-4 relative z-10">
-              <span className="bg-red-600 text-white px-2 py-1 rounded">
-                NORWAY
-              </span>
-              <h3 className="mt-2 text-lg font-semibold">Besseggen Ridge</h3>
-              <div className="flex mt-2">⭐⭐⭐⭐⭐</div>
-            </div>
-          </div>
+{packages.map((item, index) => (
+  <Link href={`/packages/${item?.slug}`} key={index}
+    className="bg-purple-500 text-white shadow-lg overflow-hidden flex items-end relative"
+    style={{
+      // backgroundImage: `url(${decodeURIComponent(baseURL + item?.image[0]?.url)})`,
+      // backgroundSize: "cover",
+      // // backgroundPosition: "center",
+      // backgroundRepeat: "no-repeat",
+      height: "300px",
+      border: "8px white solid",
+    }}
+  >
+    <Image src={baseURL + item?.image[0]?.url} className="absolute object-cover w-full h-full inset-0 z-0" alt="Image" width={500} height={500} />
+    {/* الطبقة الشفافة الداكنة */}
+    <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
+    <div className="p-4 relative z-10">
+    <span className="bg-blue-600 text-white px-2 py-1 rounded capitalize">
+      {item?.location?.split('-')[0]}
+    </span>
+    <h3 className="mt-2 text-lg font-semibold">{item?.location?.split('-')?.length > 1 && packages[0]?.location?.split('-')[1]}</h3>
+    <div className="flex mt-2">⭐⭐⭐⭐⭐</div>
+  </div>
+  </Link>
+)) }
 
-          {/* العمود الجديد ذو العرض الكامل */}
-          <div className="flex flex-col w-[95vw] md:w-[500px]">
-            {/* عنصر الصورة الثالث */}
-            <div
-              className="bg-green-500 text-white shadow-lg overflow-hidden flex items-end relative"
-              style={{
-                backgroundImage: `url(${"/images/wallll2.jpg"})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-                height: "300px",
-                border: "8px white solid",
-              }}
-            >
-              {/* الطبقة الشفافة الداكنة */}
-              <div className="absolute inset-0 bg-black opacity-50"></div>
-              <div className="p-4 relative z-10">
-                <span className="bg-green-600 text-white px-2 py-1 rounded">
-                  NEW ZEALAND
-                </span>
-                <h3 className="mt-2 text-lg font-semibold">Oxolotan City</h3>
-                <div className="flex mt-2">⭐⭐⭐⭐⭐</div>
-              </div>
-            </div>
 
-            {/* عنصر الصورة الرابع */}
-            <div
-              className="bg-purple-500 text-white shadow-lg overflow-hidden flex items-end mt-6 relative"
-              style={{
-                backgroundImage: `url(${"/images/wallll2.jpg"})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-                height: "300px",
-                border: "8px white solid",
-              }}
-            >
-              {/* الطبقة الشفافة الداكنة */}
-              <div className="absolute inset-0 bg-black opacity-50"></div>
-              <div className="p-4 relative z-10">
-                <span className="bg-purple-600 text-white px-2 py-1 rounded">
-                  NEW SECTION
-                </span>
-                <h3 className="mt-2 text-lg font-semibold">
-                  This is a new section
-                </h3>
-                <div className="flex mt-2">⭐⭐⭐⭐⭐</div>
-              </div>
-            </div>
-          </div>
         </div>
+        }
       </div>
 
       <div className=" flex  justify-center text-center mt-6">

@@ -59,6 +59,7 @@ export default function SidenavAdmin({ asideToggle, setAsideToggle }) {
                   All Locations
                 </Sidebar.Item>
               </Sidebar.Collapse>
+              
               <Sidebar.Collapse
                 label="Blogs"
                 className="side-link hover:bg-gray-300/20"
@@ -109,13 +110,44 @@ export default function SidenavAdmin({ asideToggle, setAsideToggle }) {
                   >
                   Edit booking
                   </Sidebar.Item> */}
+                  
               </Sidebar.Collapse>
-                  <Sidebar.Item
-                  as={Link} href="/dashboard/images" 
-                    className="side-link hover:bg-gray-300/20"
-                  >
-                    Images
-                  </Sidebar.Item>
+              <Sidebar.Item
+              as={Link} href="/dashboard/images" 
+                className="side-link hover:bg-gray-300/20"
+              >
+                Images
+              </Sidebar.Item>
+
+              <Sidebar.Collapse
+                label="Sections"
+                className="side-link hover:bg-gray-300/20"
+              >
+                <Sidebar.Item
+                as={Link} href="/dashboard/pages/packages" 
+                  className="side-link hover:bg-gray-300/20"
+                >
+                  Packages
+                </Sidebar.Item>
+                <Sidebar.Item
+                as={Link} href="/dashboard/pages/package" 
+                  className="side-link hover:bg-gray-300/20"
+                >
+                  Package details
+                </Sidebar.Item>
+                <Sidebar.Item
+                as={Link} href="/dashboard/pages/blogs" 
+                  className="side-link hover:bg-gray-300/20"
+                >
+                  Blogs
+                </Sidebar.Item>
+                <Sidebar.Item
+                as={Link} href="/dashboard/pages/blog" 
+                  className="side-link hover:bg-gray-300/20"
+                >
+                  Blog details
+                </Sidebar.Item>
+              </Sidebar.Collapse>
             </Sidebar.ItemGroup>
           </Sidebar.Items>
         </Sidebar>

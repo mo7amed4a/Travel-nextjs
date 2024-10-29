@@ -1,6 +1,6 @@
 import Link from "next/link";
 import PackageComponent from "@/components/packages/packageComponent";
-import { Axios } from "@/lib/api/Axios";
+import { Axios, baseURL } from "@/lib/api/Axios";
 import SubHeader from "@/components/global/sub-header";
 import PaginationApp from "@/components/global/pagination";
 import EmptyData from "@/components/global/empty";
@@ -17,6 +17,15 @@ export async function generateMetadata({ params }) {
 
 export default async function PackagesPage({ searchParams }) {
   const { page, limit } = searchParams;
+
+  let section;
+  try {
+    section = await Axios.get(`/pages/packages/sections`);
+  } catch (error) {
+    console.error("Error fetching package data:", error);
+  }
+
+  section = section?.data?.data?.sections[0];
 
   let data;
   try {
@@ -41,38 +50,48 @@ export default async function PackagesPage({ searchParams }) {
 
   // const SectionData = sub_header?.data?.data?.sections[0]
 
-  return packages &&(
-    <div>
-      <SubHeader title="Packages" desc="Packages page" />
-      {/* {SectionData && <SubHeader title={SectionData?.title} desc={SectionData?.content} 
+  return (
+    packages && (
+      <div>
+        {section && section?.title && (
+          <SubHeader
+            title={section?.title}
+            desc={section?.content}
+            img={baseURL + section?.images[0]?.url}
+          />
+        )}
+        {/* {SectionData && <SubHeader title={SectionData?.title} desc={SectionData?.content} 
       img={baseURL + SectionData?.images[0]?.url} />} */}
-      <CountryTypeSelector />
-      {packages?.length === 0 ? (
-        <EmptyData text="Packages is empty" />
-      ) : (
-        <div className="space-y-10 relative">
-          <section>
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-8 px-4 mx-auto max-w-[1100px]">
-              {packages?.map((item, index) => (
-                <Link href={`/packages/${item.id}`} key={index}>
-                  <PackageComponent packageItem={item} />
-                </Link>
-              ))}
-            </div>
-            {/* <PaginationApp 
+        <div className="mt-8">
+          <CountryTypeSelector />
+        </div>
+        {packages?.length === 0 ? (
+          <EmptyData text="Packages is empty" />
+        ) : (
+          <div className="space-y-10 relative">
+            <section>
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-8 px-4 mx-auto max-w-[1100px]">
+                {packages?.map((item, index) => (
+                  <Link href={`/packages/${item.id}`} key={index}>
+                    <PackageComponent packageItem={item} />
+                  </Link>
+                ))}
+              </div>
+              {/* <PaginationApp 
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
               totalPages={data.totalPages}
             /> */}
-            <PaginationApp
-              page={parseInt(page || 1)}
-              totalPages={totalPages}
-              limit={limit || 10}
-              url="/packages"
-            />
-          </section>
-        </div>
-      )}
-    </div>
+              <PaginationApp
+                page={parseInt(page || 1)}
+                totalPages={totalPages}
+                limit={limit || 10}
+                url="/packages"
+              />
+            </section>
+          </div>
+        )}
+      </div>
+    )
   );
 }

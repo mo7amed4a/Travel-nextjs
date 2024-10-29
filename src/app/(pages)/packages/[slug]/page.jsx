@@ -3,7 +3,7 @@ import SliderApp from "@/components/Home/Slider";
 import BookingForm from "@/components/packages/bookingForm";
 import { TabForPackageDetail } from "@/components/packages/TabForPackageDetail";
 import { titleApp } from "@/constant/data";
-import { Axios } from "@/lib/api/Axios";
+import { Axios, baseURL } from "@/lib/api/Axios";
 
 export async function generateMetadata({ params }) {
   // read route params
@@ -31,6 +31,15 @@ export async function generateMetadata({ params }) {
 export default async function PackagesDetailsPage({ params }) {
   const slug = params.slug;
 
+  let section;
+  try {
+    section = await Axios.get(`/pages/package/sections`);
+  } catch (error) {
+    console.error("Error fetching package data:", error);
+  }
+
+  section = section?.data?.data?.sections[0];
+
   let data;
   try {
     data = await Axios.get(`/package/${slug}`);
@@ -42,11 +51,13 @@ export default async function PackagesDetailsPage({ params }) {
 
   return (
     <div className="space-y-10">
-      <SubHeader
-        title="Package Details"
-        desc="description page packages details"
-        img="/images/slider-pattern.png"
-      />
+      {section && section?.title && (
+        <SubHeader
+          title={section?.title}
+          desc={section?.content}
+          img={baseURL + section?.images[0]?.url}
+        />
+      )}
       <section className="grid grid-cols-1 xl:grid-cols-6 container-app gap-5 pb-10">
         <section className="md:col-span-4 space-y-10">
           <article className="space-y-5">

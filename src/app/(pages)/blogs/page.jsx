@@ -17,6 +17,17 @@ export async function generateMetadata({ params }) {
 
 export default async function BlogsPage({ searchParams }) {
   const { page, limit } = searchParams;
+
+  let section;
+  try {
+    section = await Axios.get(`/pages/blogs/sections`);
+  } catch (error) {
+    console.error("Error fetching blogs data:", error);
+  }
+
+  section = section?.data?.data?.sections[0];
+  
+
   let recentPosts;
   try {
     recentPosts = await Axios.get(`posts?POST_PER_PAGE=5&pageNumber=1`);
@@ -39,11 +50,13 @@ export default async function BlogsPage({ searchParams }) {
 
   return (
     <div>
-      <SubHeader
-        title="Blogs"
-        desc="description page blogs"
-        img="/images/slider-pattern.png"
-      />
+      {section && section?.title && (
+          <SubHeader
+            title={section?.title}
+            desc={section?.content}
+            img={baseURL + section?.images[0]?.url}
+          />
+        )}
       <div className="relative z-40">{/* <RichEditor /> */}</div>
       <div className="container-app py-10 grid grid-cols-1 xl:grid-cols-6 gap-x-8">
         <div className="md:col-span-4">
