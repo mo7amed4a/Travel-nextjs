@@ -302,7 +302,7 @@ export default function TableBooking({
                 ) : modalDataKey === "packageId" ? (
                   <Table.Row>
                     <Table.Cell className="font-medium w-screen">
-                      <Link className="text-secondary text-xl hover:underline" href={`/packages/${modalData.id}`} >Show Package</Link>
+                      <Link className="text-secondary text-xl hover:underline" href={`/packages/${modalData.slug}`} >Show Package</Link>
                     </Table.Cell>
                   </Table.Row>
                 ) : typeof modalData === "string" ? (
