@@ -5,11 +5,10 @@ import { TabForPackageDetail } from "@/components/packages/TabForPackageDetail";
 import { titleApp } from "@/constant/data";
 import { Axios } from "@/lib/api/Axios";
 
-
-export async function generateMetadata({ params}) {
+export async function generateMetadata({ params }) {
   // read route params
-  const slug = (await params).slug
- 
+  const slug = (await params).slug;
+
   let data;
   try {
     data = await Axios.get(`/package/${slug}`);
@@ -17,7 +16,7 @@ export async function generateMetadata({ params}) {
     console.error("Error fetching post data:", error);
   }
 
-  const  item  = data.data.data?.package;
+  const item = data.data.data?.package;
 
   return {
     title: item.title + " | " + titleApp,
@@ -26,12 +25,11 @@ export async function generateMetadata({ params}) {
     // openGraph: {
     //   images: ['/some-specific-page-image.jpg'],
     // },
-  }
+  };
 }
 
-
 export default async function PackagesDetailsPage({ params }) {
-  const slug = params?.slug;
+  const slug = params.slug;
 
   let data;
   try {
@@ -39,8 +37,8 @@ export default async function PackagesDetailsPage({ params }) {
   } catch (error) {
     console.error("Error fetching package data:", error);
   }
-  
-  const item = data.data.data.package;
+
+  const item = data?.data?.data?.package;
 
   return (
     <div className="space-y-10">
@@ -56,25 +54,26 @@ export default async function PackagesDetailsPage({ params }) {
               {item.title}
             </h1>
             <figure className="w-full bg-[url(/images/img17.jpg)] bg-cover bg-center relative h-80 md:h-[500px]">
-              {item.image.length > 0 && ( item.image.length === 1 ? (
-                <SliderApp
-                  slides={item.image}
-                  size="small"
-                  props={{
-                    indicators: false,
-                    leftControl: " ",
-                    rightControl: " ",
-                  }}
-                />
-              ) : (
-                <SliderApp
-                  slides={item.image}
-                  size="small"
-                  props={{
-                    indicators: false,
-                  }}
-                />
-              ))}
+              {item.image.length > 0 &&
+                (item.image.length === 1 ? (
+                  <SliderApp
+                    slides={item.image}
+                    size="small"
+                    props={{
+                      indicators: false,
+                      leftControl: " ",
+                      rightControl: " ",
+                    }}
+                  />
+                ) : (
+                  <SliderApp
+                    slides={item.image}
+                    size="small"
+                    props={{
+                      indicators: false,
+                    }}
+                  />
+                ))}
               <div className="absolute top-[93%] inset-x-0 z-10 py-3 bg-secondary text-white text-sm flex justify-center items-center">
                 <ul className="flex justify-between [&>li>i]:pe-2 [&>li]:ps-4 divide-x gap-x-4">
                   <li>
@@ -99,8 +98,8 @@ export default async function PackagesDetailsPage({ params }) {
         </section>
         <div className="md:col-span-2 relative">
           <div className="sticky top-20 space-y-10">
-              {item?.typePackages?.length > 0 && (
-            <div className="bg-primary py-5 flex flex-col justify-center items-center space-y-3 text-white">
+            {item?.typePackages?.length > 0 && (
+              <div className="bg-primary py-5 flex flex-col justify-center items-center space-y-3 text-white">
                 <div className=" bg-primary p-1.5 text-white">
                   <h3>
                     <span className="text-2xl font-bold">
@@ -120,10 +119,10 @@ export default async function PackagesDetailsPage({ params }) {
                   <MdOutlineStarBorder /> */}
                   </span>
                 </div>
-            </div>
-              )}
+              </div>
+            )}
 
-            <BookingForm id={id} />
+            <BookingForm id={item._id} />
           </div>
         </div>
       </section>
