@@ -13,8 +13,8 @@ module.exports = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        primary: '#f56960', 
-        secondary: '#0791be',
+        primary: '#f4b335', 
+        secondary: '#0791be', //#003c4c
       },
     },
   },

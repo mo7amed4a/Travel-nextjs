@@ -14,8 +14,10 @@ import { UserContext } from "../Context/Usercontext";
 import { baseURL } from "../lib/api/Axios";
 import Link from "next/link";
 import LogoutApp from "./header/logout/logout";
+import DropdownHover from "./DropdownHover";
 
 export default function HeaderApp() {
+  const [ready, setReady] = useState(false);
   const { Userdata } = useContext(UserContext);
   const [openModal, setOpenModal] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -28,6 +30,7 @@ export default function HeaderApp() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    setReady(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
@@ -137,16 +140,28 @@ export default function HeaderApp() {
           className={`flex container-app flex-wrap items-center justify-between py-4 md:gap-x-8`}
         >
           <Navbar.Brand as={Link} href="/">
-            <img alt="" src="/images/logoapp.png" className="mr-3 h-6 sm:h-9" />
+            <img alt="" src="/images/logoapp2.png" className="mr-3 h-6 sm:h-9" />
           </Navbar.Brand>
           {/* <div className="flex md:order-1 items-center gap-x-2"> */}
           <div className="flex md:order-2 gap-x-1 md:gap-x-2">
-            <Link
-              href={"/packages"}
-              className="bg-primary flex items-center hover:bg-primary/90 focus:bg-primary/80 rounded-none text-xs md:text-sm px-2 md:px-3 py-2"
-            >
-              BOOK NOW
-            </Link>
+            {ready && !Userdata && (
+              <>
+                <Navbar.Brand
+                  as={Link}
+                  href="/auth/login"
+                  className={`font-bold text-gray-700 ${isScrolled ? 'md:text-gray-700' : "md:text-white"} me-1 `}
+                >
+                  Login
+                </Navbar.Brand>
+                <Navbar.Brand
+                  as={Link}
+                  href="/auth/signup"
+                  className={`font-bold text-gray-700 ${isScrolled ? 'md:text-gray-700' : "md:text-white"} me-1 `}
+                >
+                  Sign Up
+                </Navbar.Brand>
+              </>
+            )}
             {Userdata && (
               <Dropdown
                 arrowIcon={false}
@@ -200,10 +215,32 @@ export default function HeaderApp() {
             <Navbar.Link as={Link} href="/packages">
               Packages
             </Navbar.Link>
+            <DropdownHover />
             {/* <DropdownComponent
-                ButtonLink={<LintForDropdown title={"Packages"} />}
+                ButtonLink={"Packages"}
               >
                 <ul className="text-black space-y-4">
+                <Navbar.Link as={Link} href="/not-found">
+                  Not Found
+                </Navbar.Link>
+                <DropdownComponent end
+                ButtonLink={"Packages"}
+              >
+                <ul className="text-black space-y-4">
+                <Navbar.Link as={Link} href="/not-found">
+                  Not Found
+                </Navbar.Link>
+                <DropdownComponent end
+                ButtonLink={"Packages"}
+              >
+                <ul className="text-black space-y-4">
+                <Navbar.Link as={Link} href="/not-found">
+                  Not Found
+                </Navbar.Link>
+                </ul>
+              </DropdownComponent>
+                </ul>
+              </DropdownComponent>
                 </ul>
               </DropdownComponent> */}
             <Navbar.Link as={Link} href="/blogs">
@@ -216,16 +253,6 @@ export default function HeaderApp() {
             <Navbar.Link as={Link} href="/faqs">
               Faq
             </Navbar.Link>
-            {!Userdata && (
-              <>
-                <Navbar.Link as={Link} href="/auth/login">
-                  Login
-                </Navbar.Link>
-                <Navbar.Link as={Link} href="/auth/signup">
-                  Sign Up
-                </Navbar.Link>
-              </>
-            )}
             {/* <DropdownComponent
                 ButtonLink={<LintForDropdown title={"more pages"} href="/" />}
               >

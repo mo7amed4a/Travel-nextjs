@@ -72,7 +72,7 @@ export default async function PackagesPage({ searchParams }) {
             <section>
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-8 px-4 mx-auto max-w-[1100px]">
                 {packages?.map((item, index) => (
-                  <Link href={`/packages/${item.id}`} key={index}>
+                  <Link href={`/packages/${item.slug}`} key={index}>
                     <PackageComponent packageItem={item} />
                   </Link>
                 ))}

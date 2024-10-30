@@ -39,14 +39,14 @@ export async function generateMetadata({ params, searchParams }, parent) {
 export default async function PackagesDetailsPage({ params }) {
   const slug = params.slug;
 
-  let section;
-  try {
-    section = await Axios.get(`/pages/blog/sections`);
-  } catch (error) {
-    console.error("Error fetching blogs data:", error);
-  }
+  // let section;
+  // try {
+  //   section = await Axios.get(`/pages/blog/sections`);
+  // } catch (error) {
+  //   console.error("Error fetching blogs data:", error);
+  // }
 
-  section = section?.data?.data?.sections[0];
+  // section = section?.data?.data?.sections[0];
   
 
   let data;
@@ -73,13 +73,13 @@ export default async function PackagesDetailsPage({ params }) {
 
   return (
     <div className="w-full">
-      {section && section?.title && (
+      {/* {section && section?.title && (
           <SubHeader
             title={section?.title}
             desc={section?.content}
             img={baseURL + section?.images[0]?.url}
           />
-        )}
+        )} */}
       <div className="container-app py-10 grid grid-cols-1 xl:grid-cols-6 gap-x-8">
         <div className="space-y-10 md:col-span-4">
           <div className="h-64 md:h-96 hide-btn">

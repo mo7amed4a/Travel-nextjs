@@ -63,7 +63,7 @@ export default async function DestinationSection() {
       border: "8px white solid",
     }}
   >
-    <Image src={baseURL + item?.image[0]?.url} className="absolute object-cover w-full h-full inset-0 z-0" alt="Image" width={500} height={500} />
+    {item?.image[0]?.url && <Image src={baseURL + item?.image[0]?.url} className="absolute object-cover w-full h-full inset-0 z-0" alt="Image" width={500} height={500} />}
     {/* الطبقة الشفافة الداكنة */}
     <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
     <div className="p-4 relative z-10">

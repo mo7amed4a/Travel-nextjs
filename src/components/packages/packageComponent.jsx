@@ -30,30 +30,30 @@ export default function PackageComponent({ packageItem }) {
               />
             )}
           </Link>
-          <div className="mx-5 absolute top-[93%] left-[0.5%] right-[0.5%] z-10 p-3 bg-secondary text-white text-xs">
-            <ul className="grid grid-cols-3 [&>li>i]:pe-2 [&>li]:ps-2 divide-x ">
-              <li>
+          <div className="mx-1 absolute top-[93%] left-[0.5%] right-[0.5%] z-10 px-2 py-3 bg-secondary text-white text-xs">
+            <ul className="grid grid-cols-12 [&>li>i]:pe-2 [&>li]:ps-2 divide-x">
+              <li className="flex items-center col-span-3">
                 <i className="far fa-clock"></i>
                 <span>{packageItem?.duration?.day}D</span>/
                 <span>{packageItem?.duration?.nights}N</span>
               </li>
-              <li className="truncate hover:absolute inset-0 hover:items-center hover:flex duration-200 hover:w-full hover:bg-secondary hover:h-full hover:overflow-visible hover:whitespace-normal">
+              <li className="truncate col-span-6" >
                 {/* <i className="fas fa-user-friends"></i> */}
                 {packageItem?.category}
               </li>
-              <li className="truncate hover:absolute inset-0 hover:items-center hover:flex duration-200 hover:w-full hover:bg-secondary hover:h-full hover:overflow-visible hover:whitespace-normal">
+              <li className="flex items-center col-span-3">
                 <i className="fas fa-map-marker-alt"></i>
-                {packageItem?.location}
+                <span>{packageItem?.location?.split('-')[0]}</span>
               </li>
             </ul>
           </div>
         </figure>
         <div className="pt-8 px-4">
           <div className="space-y-3">
-            <Link href={`/packages/${packageItem?.id}`}>
-              <h3 className="font-bold text-xl">{packageItem?.titleOutSide}</h3>
+            <Link href={`/packages/${packageItem?.slug}`}>
+              <h3 className="font-bold text-xl line-clamp-2">{packageItem?.titleOutSide}</h3>
             </Link>
-            <div className="flex gap-x-2 text-gray-400 text-xs">
+            {/* <div className="flex gap-x-2 text-gray-400 text-xs">
               <span>(25 reviews)</span>
               <div className="text-primary" title="Rated 5 out of 5">
                 <i className="fa fa-star" aria-hidden="true"></i>
@@ -62,11 +62,11 @@ export default function PackageComponent({ packageItem }) {
                 <i className="fa fa-star" aria-hidden="true"></i>
                 <i className="fa fa-star text-gray-300" aria-hidden="true"></i>
               </div>
-            </div>
-            <p className="text-gray-700">{packageItem.descriptionOutSide}</p>
+            </div> */}
+            <p className="text-gray-700 line-clamp-3">{packageItem.descriptionOutSide}</p>
             <div className="flex justify-between bottom-1">
               <Link
-                href={`/packages/${packageItem?._id}`}
+                href={`/packages/${packageItem?.slug}`}
                 className="w-full text-center p-3 border hover:bg-primary hover:text-white flex items-center gap-x-2 justify-center group "
               >
                 <span className="">Book Now</span>

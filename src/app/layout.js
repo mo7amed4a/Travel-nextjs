@@ -43,7 +43,7 @@ export default function RootLayout({ children }) {
             />
           </head>
           <body className={` antialiased`}>
-          <NextTopLoader color='#f56960' />
+            <NextTopLoader color="#f4b335" />
             <Toaster position="top-center" />
             {children}
           </body>
