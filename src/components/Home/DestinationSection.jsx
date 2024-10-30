@@ -71,7 +71,7 @@ export default async function DestinationSection() {
       {item?.location?.split('-')[0]}
     </span>
     <h3 className="mt-2 text-lg font-semibold">{item?.location?.split('-')?.length > 1 && packages[0]?.location?.split('-')[1]}</h3>
-    <div className="flex mt-2">⭐⭐⭐⭐⭐</div>
+    {/* <div className="flex mt-2">⭐⭐⭐⭐⭐</div> */}
   </div>
   </Link>
 )) }
