@@ -26,10 +26,6 @@ const CountryTypeSelector = () => {
     const countryToNavigate = selectedCountry || country[0];
     const typeToNavigate = selectedType || categories[0];
 
-    // Log for debugging
-    console.log('Country:', countryToNavigate);
-    console.log('Type:', typeToNavigate);
-
     router.push(`/${encodeURIComponent(countryToNavigate)}/packages/${encodeURIComponent(typeToNavigate)}`);
     setModalOpen(false); 
   };

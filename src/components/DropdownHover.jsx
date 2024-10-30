@@ -3,23 +3,16 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import useFetch from "@/hooks/useFetch";
 
-const categories = [
-  "any",
-  "Classic Packages",
-  "Honeymoon Tours",
-  "History & Cultural Tours",
-  "Luxury Tours",
-  "Adventure Tours",
-  "Spiritual Tours",
-  "Nile Cruises",
-];
-const countries = ["Egypt", "Dubai", "Turkey", "Jordan"];
+
 const subMenu = ["Packages", "Daytours"];
 
 const DropdownHover = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [countries, setCountries] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [hoveredCountry, setHoveredCountry] = useState(null);
   const [hoveredSubMenu, setHoveredSubMenu] = useState(null);
 
@@ -30,6 +23,16 @@ const DropdownHover = () => {
     }`;
     router.push(link);
   };
+
+
+  const {data:dataLocation} = useFetch('/location')
+  const {data:dataCategories} = useFetch('/package/allCategorys');
+
+  useEffect(() => {
+    if (dataCategories?.data?.categories) setCategories(dataCategories.data.categories);
+    if (dataLocation?.data?.locations) setCountries(dataLocation.data.locations);
+  }, [dataLocation, dataCategories])
+
 
   // لإغلاق القائمة عند النقر خارجها
   useEffect(() => {
@@ -43,6 +46,9 @@ const DropdownHover = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
+
+
+
   }, []);
 
   return (
@@ -64,16 +70,16 @@ const DropdownHover = () => {
         >
           {countries.map((country) => (
             <div
-              key={country}
+              key={country.country}
               className="group relative w-full md:w-48"
-              onMouseEnter={() => setHoveredCountry(country)}
+              onMouseEnter={() => setHoveredCountry(country.country)}
               onMouseLeave={() => setHoveredCountry(null)}
             >
               <button className="block w-full text-left px-4 py-2 text-sm bg-primary rounded-full my-1 text-white hover:bg-yellow-300">
-                {country}
+                {country.country}
               </button>
 
-              {hoveredCountry === country && (
+              {hoveredCountry === country.country && (
                 <motion.div
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -105,7 +111,7 @@ const DropdownHover = () => {
                               key={category}
                               className="cursor-pointer bg-primary rounded-full my-1 text-white hover:bg-yellow-300 px-4 py-2"
                               onClick={() =>
-                                handleCategoryClick(country, submenu, category)
+                                handleCategoryClick(country.country, submenu, category)
                               }
                             >
                               {category}
