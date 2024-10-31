@@ -1,6 +1,5 @@
 import ShareSocial from "@/components/blog/share-social";
 import ViewBlog from "@/components/blog/ViewBlog";
-import SubHeader from "@/components/global/sub-header";
 import SliderApp from "@/components/Home/Slider";
 import { titleApp } from "@/constant/data";
 import { Axios, baseURL } from "@/lib/api/Axios";
@@ -24,11 +23,11 @@ export async function generateMetadata({ params, searchParams }, parent) {
     return notFound();
   }
 
-  const { post } = data.data.data;
-
-  return {
+  const { post } = data?.data?.data;
+  
+  return post && {
     title: post.title + " | " + titleApp,
-    description: post.description,
+    description: post?.descriptionMeta || '',
     keywords: post.tags.join(", "),
     // openGraph: {
     //   images: ["/some-specific-page-image.jpg"],
@@ -38,16 +37,6 @@ export async function generateMetadata({ params, searchParams }, parent) {
 
 export default async function PackagesDetailsPage({ params }) {
   const slug = params.slug;
-
-  // let section;
-  // try {
-  //   section = await Axios.get(`/pages/blog/sections`);
-  // } catch (error) {
-  //   console.error("Error fetching blogs data:", error);
-  // }
-
-  // section = section?.data?.data?.sections[0];
-  
 
   let data;
   try {
@@ -72,14 +61,7 @@ export default async function PackagesDetailsPage({ params }) {
   recentPosts = recentPosts?.data?.data?.posts;
 
   return (
-    <div className="w-full">
-      {/* {section && section?.title && (
-          <SubHeader
-            title={section?.title}
-            desc={section?.content}
-            img={baseURL + section?.images[0]?.url}
-          />
-        )} */}
+    <div className="w-full mt-40">
       <div className="container-app py-10 grid grid-cols-1 xl:grid-cols-6 gap-x-8">
         <div className="space-y-10 md:col-span-4">
           <div className="h-64 md:h-96 hide-btn">
@@ -119,7 +101,7 @@ export default async function PackagesDetailsPage({ params }) {
           <ShareSocial imageUrl={baseURL + post?.image[0].url} />
         </div>
         <aside className="md:col-span-2 mt-8 relative">
-          <div className="sticky top-20">
+          <div className="sticky top-40">
             <h3 className="widget-title text-xl font-semibold mb-4">
               Recent Post
             </h3>

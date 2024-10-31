@@ -21,7 +21,7 @@ export default async function DestinationSection() {
       >
         <div>
           <div className="flex items-center justify-center sm:justify-start">
-            <div className="w-24 bg-red-500 h-[3px] inline-block"></div>
+            <div className="w-24 bg-primary h-[3px] inline-block"></div>
             <p className="ml-2" style={{ color: "red" }}>
               POPULAR DESTINATION
             </p>
@@ -82,7 +82,7 @@ export default async function DestinationSection() {
       </div>
 
       <div className=" flex  justify-center text-center mt-6">
-        <button className="bg-red-500 text-white  px-3.5 py-2.5">
+        <button className="bg-primary text-white  px-3.5 py-2.5">
           MORE DESTINATION
         </button>
       </div>

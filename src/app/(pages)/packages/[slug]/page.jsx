@@ -4,6 +4,7 @@ import BookingForm from "@/components/packages/bookingForm";
 import { TabForPackageDetail } from "@/components/packages/TabForPackageDetail";
 import { titleApp } from "@/constant/data";
 import { Axios, baseURL } from "@/lib/api/Axios";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
   // read route params
@@ -13,15 +14,17 @@ export async function generateMetadata({ params }) {
   try {
     data = await Axios.get(`/package/${slug}`);
   } catch (error) {
-    console.error("Error fetching post data:", error);
+    console.error("Error fetching post data2:", error);
   }
 
-  const item = data.data.data?.package;
-
-  return {
-    title: item.title + " | " + titleApp,
-    description: item.description,
-    keywords: item.keyword,
+  const item = data?.data?.data?.package;
+  if (item === undefined) {
+    return notFound()
+  }
+  return item && {
+    title: item?.title + " | " + titleApp,
+    description: item?.descriptionMeta,
+    keywords: item?.keyword,
     // openGraph: {
     //   images: ['/some-specific-page-image.jpg'],
     // },
@@ -44,20 +47,24 @@ export default async function PackagesDetailsPage({ params }) {
   try {
     data = await Axios.get(`/package/${slug}`);
   } catch (error) {
-    console.error("Error fetching package data:", error);
+    // console.error("Error fetching package data:", error);
   }
 
   const item = data?.data?.data?.package;
 
-  return (
-    <div className="space-y-10">
-      {section && section?.title && (
+  if (item === undefined) {
+    return notFound()
+  }
+
+  return item && (
+    <div className="space-y-10 mt-40">
+      {/* {section && section?.title && (
         <SubHeader
           title={section?.title}
           desc={section?.content}
           img={baseURL + section?.images[0]?.url}
         />
-      )}
+      )} */}
       <section className="grid grid-cols-1 xl:grid-cols-6 container-app gap-5 pb-10">
         <section className="md:col-span-4 space-y-10">
           <article className="space-y-5">
@@ -108,7 +115,7 @@ export default async function PackagesDetailsPage({ params }) {
           <TabForPackageDetail packageData={item} />
         </section>
         <div className="md:col-span-2 relative">
-          <div className="sticky top-20 space-y-10">
+          <div className="sticky top-40 space-y-10">
             {item?.typePackages?.length > 0 && (
               <div className="bg-primary py-5 flex flex-col justify-center items-center space-y-3 text-white">
                 <div className=" bg-primary p-1.5 text-white">

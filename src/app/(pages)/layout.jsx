@@ -7,6 +7,7 @@ export default function layout({ children }) {
   return (
     <div>
         <HeaderApp />
+        <div className='-mt-24 md:-mt-40'></div>
         {children}
         <InquireApp/>
         <FooterApp />

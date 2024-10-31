@@ -29,7 +29,7 @@ const DropdownHover = () => {
   const {data:dataCategories} = useFetch('/package/allCategorys');
 
   useEffect(() => {
-    if (dataCategories?.data?.categories) setCategories([...new Set(dataCategories.data.categories)]);
+    if (dataCategories?.data?.categories) setCategories([...new Set(dataCategories.data.categories.map(e=> e.toLowerCase()))]);
     if (dataLocation?.data?.locations) setCountries(dataLocation.data.locations);
   }, [dataLocation, dataCategories])
 

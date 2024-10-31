@@ -27,6 +27,7 @@ const PackageSchema = Yup.object().shape({
   }),
   location: Yup.string().required("Location is required"),
   category: Yup.string().required("Category is required"),
+  descriptionMeta: Yup.string().required("descriptionMeta is required"),
   keywords: Yup.string().required("Keywords are required"), // إضافة الحقل هنا
   program: Yup.object().shape({
     title: Yup.string().required("Program title is required"),
@@ -78,6 +79,7 @@ export default function PackageEdit() {
         description: values.program.description,
         programItem: values.program.programItem,
       },
+      descriptionMeta: values.descriptionMeta,
       keyword: values.keywords,
     };
 
@@ -118,6 +120,7 @@ export default function PackageEdit() {
             description: "",
             programItem: [{ day: 1, description: "" }],
           },
+          descriptionMeta: "",
           keywords: "",
         }}
         validationSchema={PackageSchema}
@@ -403,6 +406,24 @@ export default function PackageEdit() {
                       </div>
                     )}
                   />
+
+<div className="flex flex-col mb-4">
+                    <label htmlFor="descriptionMeta" className="mb-2">
+                    descriptionMeta
+                    </label>
+                    <Field
+                    
+                      name="descriptionMeta"
+                      rows="5"
+                      className="p-2 border border-gray-300 rounded resize-none"
+                    />
+                    {errors.descriptionMeta &&
+                      touched.descriptionMeta && (
+                        <div className="text-red-500 text-sm">
+                          {errors.descriptionMeta}
+                        </div>
+                      )}
+                  </div>
 
                   <div className="flex flex-col mt-4">
                     <label htmlFor="keywords" className="mb-2">

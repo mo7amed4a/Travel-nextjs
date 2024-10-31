@@ -55,12 +55,9 @@ export default async function SliderApp({
           : slides.map((slide, index) => (
               <Image
                 key={index}
-                src={
-                  slide.url === "/images/img27.jpg"
-                    ? slide.url
-                    : baseURL + slide.url
+                src={ baseURL + slide.url
                 }
-                alt={slide.title}
+                alt={slide.alt}
                 className="w-full h-full bg-contain"
                 width={600}
                 height={400}

@@ -79,7 +79,7 @@ export default async function BlogsPage({ searchParams }) {
           )}
         </div>
         <aside className="md:col-span-2 mt-8 relative">
-          <div className="sticky top-20">
+          <div className="sticky top-40">
             <h3 className="widget-title text-xl font-semibold mb-4">
               Recent Post
             </h3>

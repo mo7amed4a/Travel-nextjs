@@ -32,7 +32,7 @@ export default async function FaqPage({ searchParams }) {
   const faqs  = data?.data?.data?.faqs;
 
   return (
-    <div className="-mt-36">
+    <div>
       {section && section?.title && (
           <SubHeader
             title={section?.title}

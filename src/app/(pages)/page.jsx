@@ -12,7 +12,7 @@ import PackageSection from "@/components/Home/PackageSection";
 export default function Home() {
    
     return (
-        <div className="-mt-36">
+        <div className="-mt-28 md:-mt-40">
              <SliderApp />
              <DestinationSection />
             <PackageSection />

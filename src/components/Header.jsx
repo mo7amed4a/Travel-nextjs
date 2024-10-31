@@ -15,8 +15,15 @@ import { baseURL } from "../lib/api/Axios";
 import Link from "next/link";
 import LogoutApp from "./header/logout/logout";
 import DropdownHover from "./DropdownHover";
+import { usePathname } from "next/navigation";
 
 export default function HeaderApp() {
+  const pathname = usePathname();
+  const isPathname =
+    pathname === "/" ||
+    pathname === "/packages" ||
+    pathname === "/faqs" ||
+    pathname === "/blogs";
   const [ready, setReady] = useState(false);
   const { Userdata } = useContext(UserContext);
   const [openModal, setOpenModal] = useState(false);
@@ -41,182 +48,198 @@ export default function HeaderApp() {
   }, []);
 
   return (
-    <div className="relative z-50">
-      <MegaMenu
-        className={`text-white p-0 ${
-          isScrolled
-            ? "fixed top-0 inset-x-0 bg-white z-50"
-            : "relative md:bg-transparent"
-        }`}
-      >
-        {!isScrolled && (
-          <div className="container-app flex justify-between items-center text-gray-500 bg-white md:bg-transparent md:text-white">
-            {/* Contact Information */}
-            <ul className="flex gap-x-4 p-4">
-              <li>
-                <a href="#" className="flex gap-x-1 items-center">
-                  <i className="fas fa-phone-alt"></i>
-                  <span className="hidden md:block">01010101000</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="flex gap-x-1 items-center">
-                  <i className="fas fa-envelope"></i>
-                  <span className="hidden md:block">3m tourism@3m.com</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="flex gap-x-1 items-center">
-                  <i className="fas fa-map-marker-alt"></i>
-                  <span className="hidden md:block">32 nwe cairo</span>
-                </a>
-              </li>
-            </ul>
-            {/* Social Media Links and Search Modal */}
-            <ul className="flex justify-end gap-x-4 px-4">
-              <li>
-                <a href="#">
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i className="fab fa-linkedin"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i className="fab fa-twitter"></i>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i className="fab fa-instagram"></i>
-                </a>
-              </li>
-              <li className="border-s ps-2">
-                <a
-                  onClick={() => setOpenModal(!openModal)}
-                  className="fa fa-search cursor-pointer"
-                ></a>
-              </li>
-            </ul>
-            <Modal
-              dismissible
-              show={openModal}
-              onClose={() => setOpenModal(false)}
-            >
-              <Modal.Header>Search</Modal.Header>
-              <Modal.Body>
-                <div>
-                  <div className="mb-2 block">
-                    <Label htmlFor="search" value="Search" />
-                  </div>
-                  <TextInput
-                    id="search"
-                    type="search"
-                    placeholder="Search.."
-                    onChange={(e) => setSearchText(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        handleSearch();
-                      }
-                    }}
-                  />
-                </div>
-                {searchText}
-              </Modal.Body>
-              <Modal.Footer className="justify-end">
-                <Button color="gray" onClick={() => setOpenModal(false)}>
-                  Cancel
-                </Button>
-                <Button onClick={() => handleSearch()}>Search</Button>
-              </Modal.Footer>
-            </Modal>
-          </div>
-        )}
-        {/* Main Navbar */}
-        <div
-          className={`flex container-app flex-wrap items-center justify-between py-4 md:gap-x-8`}
+    <div className={`relative ${isScrolled ? "h-28 md:h-40" : "h-28 md:h-40"} z-50 ${isPathname ? "" : ""}`}>
+        <MegaMenu
+          className={`text-white p-0 fixed top-0 inset-x-0  ${
+            isScrolled
+              ? "bg-white z-50 shadow"
+              : `${isPathname ? "md:bg-transparent" : ""}`
+          }`}
         >
-          <Navbar.Brand as={Link} href="/">
-            <img alt="" src="/images/logoapp2.png" className="mr-3 h-6 sm:h-9" />
-          </Navbar.Brand>
-          {/* <div className="flex md:order-1 items-center gap-x-2"> */}
-          <div className="flex md:order-2 gap-x-1 md:gap-x-2">
-            {ready && !Userdata && (
-              <>
-                <Navbar.Brand
-                  as={Link}
-                  href="/auth/login"
-                  className={`font-bold text-gray-700 ${isScrolled ? 'md:text-gray-700' : "md:text-white"} me-1 `}
-                >
-                  Login
-                </Navbar.Brand>
-                <Navbar.Brand
-                  as={Link}
-                  href="/auth/signup"
-                  className={`font-bold text-gray-700 ${isScrolled ? 'md:text-gray-700' : "md:text-white"} me-1 `}
-                >
-                  Sign Up
-                </Navbar.Brand>
-              </>
-            )}
-            {Userdata && (
-              <Dropdown
-                arrowIcon={false}
-                inline
-                className="w-44"
-                label={
-                  <Avatar
-                    alt={Userdata.firstName}
-                    className="[&>div>img]:w-9 md:[&>div>img]:w-10 [&>div>img]:h-9 md:[&>div>img]:h-10"
-                    img={
-                      Userdata?.profilePhoto?.startsWith("http")
-                        ? Userdata.profilePhoto
-                        : `${baseURL}${Userdata.profilePhoto}`
-                    }
-                    rounded
-                  />
-                }
+          {true && (
+            <div
+              className={`container-app flex justify-between items-center text-gray-800 bg-white ${
+                isPathname ? isScrolled ? "text-gray-800" : "md:bg-transparent md:text-white" : ""
+              } `}
+            >
+              {/* Contact Information */}
+              <ul className="flex gap-x-4 p-4">
+                <li>
+                  <a href="#" className="flex gap-x-1 items-center">
+                    <i className="fas fa-phone-alt"></i>
+                    <span className="hidden md:block">01010101000</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="flex gap-x-1 items-center">
+                    <i className="fas fa-envelope"></i>
+                    <span className="hidden md:block">3m tourism@3m.com</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="flex gap-x-1 items-center">
+                    <i className="fas fa-map-marker-alt"></i>
+                    <span className="hidden md:block">32 nwe cairo</span>
+                  </a>
+                </li>
+              </ul>
+              {/* Social Media Links and Search Modal */}
+              <ul className="flex justify-end gap-x-4 px-4">
+                <li>
+                  <a href="#">
+                    <i className="fab fa-facebook-f"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i className="fab fa-linkedin"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i className="fab fa-twitter"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i className="fab fa-instagram"></i>
+                  </a>
+                </li>
+                <li className="border-s ps-2">
+                  <a
+                    onClick={() => setOpenModal(!openModal)}
+                    className="fa fa-search cursor-pointer"
+                  ></a>
+                </li>
+              </ul>
+              <Modal
+                dismissible
+                show={openModal}
+                onClose={() => setOpenModal(false)}
               >
-                <Dropdown.Header>
-                  <span className="block text-sm truncate font-bold">{`${Userdata.firstName} ${Userdata.lastName}`}</span>
-                  <span className="block truncate text-xs font-medium">
-                    {Userdata.email}
-                  </span>
-                </Dropdown.Header>
-                {Userdata?.isAdmin && (
-                  <Dropdown.Item as={Link} href={"/dashboard"}>
-                    Dashboard
-                  </Dropdown.Item>
-                )}
-                <Dropdown.Item as={Link} href={"/profile"}>
-                  Profile
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <LogoutApp>
-                  <Dropdown.Item>Sign out</Dropdown.Item>
-                </LogoutApp>
-              </Dropdown>
-            )}
-            <Navbar.Toggle />
-          </div>
-          <Navbar.Collapse
-            className={`[&>ul]:space-x-0 [&>ul]:gap-x-4 [&>*>*>*]:uppercase [&>*>*>*]:font-bold bg-white md:bg-transparent ${
-              isScrolled
-                ? "[&>*>*>*>a]:text-black [&>*>*>*]:text-black "
-                : "[&>*>*>*>a]:text-black [&>*>*>*]:text-black md:[&>*>*>*>a]:text-white md:[&>*>*>*]:text-white"
-            }`}
+                <Modal.Header>Search</Modal.Header>
+                <Modal.Body>
+                  <div>
+                    <div className="mb-2 block">
+                      <Label htmlFor="search" value="Search" />
+                    </div>
+                    <TextInput
+                      id="search"
+                      type="search"
+                      placeholder="Search.."
+                      onChange={(e) => setSearchText(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          handleSearch();
+                        }
+                      }}
+                    />
+                  </div>
+                  {searchText}
+                </Modal.Body>
+                <Modal.Footer className="justify-end">
+                  <Button color="gray" onClick={() => setOpenModal(false)}>
+                    Cancel
+                  </Button>
+                  <Button onClick={() => handleSearch()}>Search</Button>
+                </Modal.Footer>
+              </Modal>
+            </div>
+          )}
+          {/* Main Navbar */}
+          <div
+            className={`flex container-app flex-wrap items-center justify-between py-4 md:gap-x-8`}
           >
-            <Navbar.Link as={Link} href="/">
-              Home
-            </Navbar.Link>
-            <Navbar.Link as={Link} href="/packages">
-              Packages
-            </Navbar.Link>
-            <DropdownHover />
-            {/* <DropdownComponent
+            <Navbar.Brand as={Link} href="/">
+              <img
+                alt=""
+                src="/images/logoapp2.png"
+                className="mr-3 h-6 sm:h-9"
+              />
+            </Navbar.Brand>
+            {/* <div className="flex md:order-1 items-center gap-x-2"> */}
+            <div className="flex md:order-2 gap-x-1 md:gap-x-2">
+              {ready && !Userdata && (
+                <>
+                  <Navbar.Brand
+                    as={Link}
+                    href="/auth/login"
+                    className={`font-bold text-gray-700 ${
+                      isScrolled ? "md:text-gray-700" : "md:text-white"
+                    } me-1 `}
+                  >
+                    Login
+                  </Navbar.Brand>
+                  <Navbar.Brand
+                    as={Link}
+                    href="/auth/signup"
+                    className={`font-bold text-gray-700 ${
+                      isScrolled ? "md:text-gray-700" : "md:text-white"
+                    } me-1 `}
+                  >
+                    Sign Up
+                  </Navbar.Brand>
+                </>
+              )}
+              {Userdata && (
+                <Dropdown
+                  arrowIcon={false}
+                  inline
+                  className="w-44"
+                  label={
+                    <Avatar
+                      alt={Userdata.firstName}
+                      className="[&>div>img]:w-9 md:[&>div>img]:w-10 [&>div>img]:h-9 md:[&>div>img]:h-10"
+                      img={
+                        Userdata?.profilePhoto?.startsWith("http")
+                          ? Userdata.profilePhoto
+                          : `${baseURL}${Userdata.profilePhoto}`
+                      }
+                      rounded
+                    />
+                  }
+                >
+                  <Dropdown.Header>
+                    <span className="block text-sm truncate font-bold">{`${Userdata.firstName} ${Userdata.lastName}`}</span>
+                    <span className="block truncate text-xs font-medium">
+                      {Userdata.email}
+                    </span>
+                  </Dropdown.Header>
+                  {Userdata?.isAdmin && (
+                    <Dropdown.Item as={Link} href={"/dashboard"}>
+                      Dashboard
+                    </Dropdown.Item>
+                  )}
+                  <Dropdown.Item as={Link} href={"/profile"}>
+                    Profile
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <LogoutApp>
+                    <Dropdown.Item>Sign out</Dropdown.Item>
+                  </LogoutApp>
+                </Dropdown>
+              )}
+              <Navbar.Toggle />
+            </div>
+            <Navbar.Collapse
+              className={`[&>ul]:space-x-0 [&>ul]:gap-x-4 [&>*>*>*]:uppercase [&>*>*>*]:font-bold bg-white md:bg-transparent ${
+                isScrolled
+                  ? "[&>*>*>*>a]:text-black [&>*>*>*]:text-black "
+                  : `[&>*>*>*>a]:text-black [&>*>*>*]:text-black  ${
+                      isPathname
+                        ? "md:[&>*>*>*>a]:text-white md:[&>*>*>*]:text-white"
+                        : ""
+                    }`
+              }`}
+            >
+              <Navbar.Link as={Link} href="/">
+                Home
+              </Navbar.Link>
+              <Navbar.Link as={Link} href="/packages">
+                Packages
+              </Navbar.Link>
+              <DropdownHover />
+              {/* <DropdownComponent
                 ButtonLink={"Packages"}
               >
                 <ul className="text-black space-y-4">
@@ -243,17 +266,17 @@ export default function HeaderApp() {
               </DropdownComponent>
                 </ul>
               </DropdownComponent> */}
-            <Navbar.Link as={Link} href="/blogs">
-              Blogs
-            </Navbar.Link>
-            {/* <DropdownComponent ButtonLink={<LintForDropdown title={"Blogs"} />}>
+              <Navbar.Link as={Link} href="/blogs">
+                Blogs
+              </Navbar.Link>
+              {/* <DropdownComponent ButtonLink={<LintForDropdown title={"Blogs"} />}>
                 <ul className="text-black space-y-4">
                 </ul>
               </DropdownComponent> */}
-            <Navbar.Link as={Link} href="/faqs">
-              Faq
-            </Navbar.Link>
-            {/* <DropdownComponent
+              <Navbar.Link as={Link} href="/faqs">
+                Faq
+              </Navbar.Link>
+              {/* <DropdownComponent
                 ButtonLink={<LintForDropdown title={"more pages"} href="/" />}
               >
                 <ul className="text-black space-y-4">
@@ -274,9 +297,9 @@ export default function HeaderApp() {
                   </Navbar.Link>
                 </ul>
               </DropdownComponent> */}
-          </Navbar.Collapse>
-        </div>
-      </MegaMenu>
+            </Navbar.Collapse>
+          </div>
+        </MegaMenu>
     </div>
   );
 }

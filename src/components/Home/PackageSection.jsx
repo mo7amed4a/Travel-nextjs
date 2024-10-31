@@ -18,8 +18,8 @@ export default async function PackageSection() {
     <div className="mt-[100px]">
       <div className="flex flex-col items-center justify-center text-center">
         <div className="flex items-center mb-4">
-          <div className="w-24 bg-red-500 h-[3px] inline-block"></div>
-          <p className="ml-2 text-red-500 uppercase font-semibold text-sm">
+          <div className="w-24 bg-primary h-[3px] inline-block"></div>
+          <p className="ml-2 text-primary uppercase font-semibold text-sm">
             Explore great places
           </p>
         </div>

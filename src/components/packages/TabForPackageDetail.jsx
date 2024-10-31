@@ -13,7 +13,6 @@ export function TabForPackageDetail({ packageData }) {
     >
       <Tabs.Item title="DESCRIPTION" className="rounded-none">
         <div className="space-y-3">
-          <h4 className="text-lg font-bold">{packageData.title}</h4>
           <ViewBlog html={packageData.description}/>
           {/* <p className="leading-relaxed"></p> */}
         </div>
@@ -24,7 +23,6 @@ export function TabForPackageDetail({ packageData }) {
       <Tabs.Item title="PROGRAM">
         <div className="space-y-3">
           <div className="text-4xl font-bold flex items-center space-x-4">
-            <h1>{packageData.program.title}</h1>
             <span className="text-sm">
               {"("} {packageData.duration.day} days {")"}
             </span>
@@ -34,6 +32,7 @@ export function TabForPackageDetail({ packageData }) {
             {packageData.program.programItem.map((pItem, index) => (
               <div key={index} className="flex items-center">
                 <span className="min-w-16 h-16 relative z-10 rounded-full text-white text-lg bg-primary flex flex-col -space-y-2 items-center justify-center">
+                  {/* TODO : remove day and replace_oh b title day  */}
                   <small>day</small>
                   <b>{index + 1}</b>
                 </span>

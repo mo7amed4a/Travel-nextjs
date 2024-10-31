@@ -5,7 +5,7 @@ export default function SubHeader({
 }) {
   return (
     <section
-      className="-mt-24 md:-mt-36  bg-[#555555] h-[50vh] object-cover bg-no-repeat bg-bottom flex justify-center items-center text-white font-bold"
+      className=" bg-[#555555] h-[50vh] object-cover bg-no-repeat bg-bottom flex justify-center items-center text-white font-bold"
       style={{
         // backgroundImage: `url(${img})`,
         backgroundImage: `url("/images/slider-pattern.png")`,

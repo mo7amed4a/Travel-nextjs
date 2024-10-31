@@ -65,7 +65,7 @@ export default function ProfilePage() {
   return Userdata && (
     <div>
       <section
-        className="-mt-24 md:-mt-36 px-2 bg-[#555555] h-[50vh] object-cover bg-no-repeat bg-bottom flex justify-start items-end font-bold"
+        className="px-2 bg-[#555555] h-[50vh] object-cover bg-no-repeat bg-bottom flex justify-start items-end font-bold"
         style={{ backgroundImage: "url(/images/slider-pattern.png)" }}
       >
         <div className="container bg-white rounded p-3 shadow-md mx-auto px-4 flex flex-col items-start [&>div]:px-0">

@@ -124,7 +124,7 @@ export default function DashboardPage() {
           </div>
         </div>
       </section>
-      <section className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <section className="mt-10 grid grid-cols-1 gap-4">
          <TableBooking
           values={packageData?.data?.packages?.slice(0, 6)}
           title="Recent Packages"
