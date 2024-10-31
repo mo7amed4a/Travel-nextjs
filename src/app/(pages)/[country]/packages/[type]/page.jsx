@@ -61,9 +61,7 @@ export default async function PackagesPage({ params, searchParams }) {
           <section>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-8 px-4 mx-auto max-w-[1100px]">
               {packages?.map((item, index) => (
-                <Link href={`/packages/${item.id}`} key={index}>
-                  <PackageComponent packageItem={item} />
-                </Link>
+                  <PackageComponent packageItem={item} key={index} />
               ))}
             </div>
             <PaginationApp

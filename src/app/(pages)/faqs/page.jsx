@@ -7,26 +7,27 @@ import SubHeader from "@/components/global/sub-header";
 
 export default async function FaqPage({ searchParams }) {
   const { page, limit } = searchParams;
-
-
+  
+  
   let section;
   try {
     section = await Axios.get(`/pages/faqs/sections`);
   } catch (error) {
     console.error("Error fetching faqs data:", error);
   }
-
-  section = section?.data?.data?.sections[0];
   
-
   let data;
   try {
     data = await Axios.get(
       `/faq/answer?page=${page || 1}&limit=${limit || 10}`
-    );    
+    );
   } catch (error) {
     console.error("Error fetching faqs data:", error);
   }
+  
+  section = section?.data?.data?.sections[0];
+  
+
 
   const totalPages = data?.data?.totalPages;
   const faqs  = data?.data?.data?.faqs;

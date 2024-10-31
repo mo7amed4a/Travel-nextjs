@@ -27,7 +27,7 @@ export default async function SliderApp({
       <Carousel {...props}>
         {size != "small"
           ? slides.map((slide, index) => (
-              <div className="flex h-full items-center justify-center bg-[url(https://adilbaba.online/assets/wallpaperflare.com_wallpaper2-Bsxvae_n.jpg)]">
+              <div key={index} className="flex h-full items-center justify-center bg-[url(https://adilbaba.online/assets/wallpaperflare.com_wallpaper2-Bsxvae_n.jpg)]">
                 {/* <div
                   key={index}
                   className="absolute inset-0 h-full w-full flex justify-center items-center"
