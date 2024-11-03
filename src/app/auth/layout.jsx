@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import React from "react";
 
 export default function layout({ children }) {
-  if (cookies().get("Authorization")?.value || null) {
+  if (cookies()?.get("Authorization")?.value || null) {
     redirect('/')
   }
   return (

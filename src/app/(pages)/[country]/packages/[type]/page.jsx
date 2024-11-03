@@ -65,6 +65,7 @@ export default async function PackagesPage({ params, searchParams }) {
               ))}
             </div>
             <PaginationApp
+            
               page={parseInt(page || 1)}
               totalPages={totalPages}
               limit={limit || 10}

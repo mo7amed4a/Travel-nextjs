@@ -130,22 +130,58 @@ export default function SidenavAdmin({ asideToggle, setAsideToggle }) {
                   Packages
                 </Sidebar.Item>
                 <Sidebar.Item
-                as={Link} href="/dashboard/pages/package" 
-                  className="side-link hover:bg-gray-300/20"
-                >
-                  Package details
-                </Sidebar.Item>
-                <Sidebar.Item
                 as={Link} href="/dashboard/pages/blogs" 
                   className="side-link hover:bg-gray-300/20"
                 >
                   Blogs
                 </Sidebar.Item>
+              </Sidebar.Collapse>
+
+              <Sidebar.Collapse
+                label="layout"
+                className="side-link hover:bg-gray-300/20"
+              >
                 <Sidebar.Item
-                as={Link} href="/dashboard/pages/blog" 
+                as={Link} href="/dashboard/pages/social" 
                   className="side-link hover:bg-gray-300/20"
                 >
-                  Blog details
+                  Social links
+                </Sidebar.Item>
+                <Sidebar.Item
+                as={Link} href="/dashboard/pages/footer" 
+                  className="side-link hover:bg-gray-300/20"
+                >
+                  Footer
+                </Sidebar.Item>
+              </Sidebar.Collapse>
+
+              <Sidebar.Collapse
+                label="Home"
+                className="side-link hover:bg-gray-300/20"
+              >
+                <Sidebar.Item
+                as={Link} href="/dashboard/pages/slider" 
+                  className="side-link hover:bg-gray-300/20"
+                >
+                  Slider
+                </Sidebar.Item>
+                <Sidebar.Item
+                as={Link} href="/dashboard/pages/destination" 
+                  className="side-link hover:bg-gray-300/20"
+                >
+                  Destination
+                </Sidebar.Item>
+                <Sidebar.Item
+                as={Link} href="/dashboard/pages/packageSectionData" 
+                  className="side-link hover:bg-gray-300/20"
+                >
+                  Package Section
+                </Sidebar.Item>
+                <Sidebar.Item
+                as={Link} href="/dashboard/pages/blogSectionData" 
+                  className="side-link hover:bg-gray-300/20"
+                >
+                  Blog Section
                 </Sidebar.Item>
               </Sidebar.Collapse>
             </Sidebar.ItemGroup>

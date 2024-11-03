@@ -2,7 +2,7 @@
 import BlogComponentApp from "@/components/blog/blogsComponent";
 import { Axios } from "@/lib/api/Axios";
 
-export default async function Resentpostes() {
+export default async function Resentpostes({blogSectionData}) {
   let recentPosts;
   try {
     recentPosts = await Axios.get(`/posts?pageNumber=1&POST_PER_PAGE=3`);
@@ -21,12 +21,10 @@ export default async function Resentpostes() {
           </p>
         </div>
 
-        <h2 className="text-5xl font-bold mb-4">OUR RECENT POSTS</h2>
+        <h2 className="text-5xl font-bold mb-4">{blogSectionData?.title}</h2>
 
         <p className="text-lg text-gray-600 max-w-2xl">
-          Mollit voluptatem perspiciatis convallis elementum corporis quo
-          veritatis aliquid blandit, blandit torquent, odit placeat. Adipiscing
-          repudiandae eius cursus? Nostrum magnis maxime curae placeat.
+          {blogSectionData?.content}
         </p>
       </div>
 

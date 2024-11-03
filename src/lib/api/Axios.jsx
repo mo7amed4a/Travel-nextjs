@@ -14,7 +14,7 @@ export const Axios = axios.create({
 // export const AxiosServer = axios.create({
 //     baseURL: baseURL + '/api/v1',
 //     headers: {
-//         Authorization: `Bearer ${cookies().get("Authorization")?.value || null}` 
+//         Authorization: `Bearer ${cookies()?.get("Authorization")?.value || null}` 
 //     }
 // });
 

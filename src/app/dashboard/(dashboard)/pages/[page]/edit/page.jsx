@@ -1,9 +1,10 @@
-"use client";
+'use client';
 import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Axios, baseURL } from "@/lib/api/Axios";
 import toast from "react-hot-toast";
 import { Label, TextInput, Textarea, Button, FileInput } from "flowbite-react";
+import Link from "next/link";
 
 export default function Page() {
   const router = useRouter();
@@ -13,39 +14,38 @@ export default function Page() {
     content: "",
     order: 1,
     images: [],
-    links: [{ label: "", url: "" }],
+    links: [],
   });
 
   useEffect(() => {
     const fetchSectionData = async () => {
-      if (id) {
-        try {
-          const url = `/pages/${page}/sections/${id}`;
-          const res = await Axios.get(url);
-          if (res.data && res.data.data && res.data.data.section) {
-            const { title, content, order, images, links } =
-              res.data.data.section;
-            const formattedImages = images.map((image) => ({
-              url: image.url || "",
-              description: image.description || "",
-              file: null,
-            }));
-            setSectionData({
-              title,
-              content,
-              order,
-              images: formattedImages,
-              links,
-            });
-          } else {
-            toast.error("No data found");
-          }
-        } catch (error) {
-          router.back()
-          toast.error("Failed to fetch section data");
+      try {
+        const url = `/pages/${page}/sections`;
+        const res = await Axios.get(url);
+        if (res.data && res.data.data && res.data.data.sections) {
+          const { title, content, order, images, links } =
+            res.data.data.sections[0];
+          const formattedImages = images.map((image) => ({
+            url: image.url || "",
+            title: image.title || "",
+            description: image.description || "",
+            file: null,
+          }));
+          setSectionData({
+            title,
+            content,
+            order,
+            images: formattedImages,
+            links,
+          });
+        } else {
+          toast.error("No data found");
         }
+      } catch (error) {
+        toast.error("Failed to fetch section data");
       }
     };
+
     fetchSectionData();
   }, [id, page]);
 
@@ -54,18 +54,32 @@ export default function Page() {
     setSectionData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleImageChange = (index, file) => {
-    setSectionData((prev) => {
-      const updatedImages = [...prev.images];
-      updatedImages[index] = { ...updatedImages[index], file };
-      return { ...prev, images: updatedImages };
-    });
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    const newImages = files.map((file) => ({
+      url: "",
+      title: "",
+      description: "",
+      file,
+    }));
+    setSectionData((prev) => ({
+      ...prev,
+      images: [...newImages],
+    }));
   };
 
   const handleImageDescriptionChange = (index, description) => {
     setSectionData((prev) => {
       const updatedImages = [...prev.images];
-      updatedImages[index] = { ...updatedImages[index], description };
+      updatedImages[index].description = description;
+      return { ...prev, images: updatedImages };
+    });
+  };
+
+  const handleImageTitleChange = (index, title) => {
+    setSectionData((prev) => {
+      const updatedImages = [...prev.images];
+      updatedImages[index].title = title;
       return { ...prev, images: updatedImages };
     });
   };
@@ -73,16 +87,9 @@ export default function Page() {
   const handleLinkChange = (index, label, url) => {
     setSectionData((prev) => {
       const updatedLinks = [...prev.links];
-      updatedLinks[index] = { ...updatedLinks[index], label, url };
+      updatedLinks[index] = { label, url };
       return { ...prev, links: updatedLinks };
     });
-  };
-
-  const addNewImageField = () => {
-    setSectionData((prev) => ({
-      ...prev,
-      images: [...prev.images, { url: "", description: "", file: null }],
-    }));
   };
 
   const addNewLinkField = () => {
@@ -104,8 +111,9 @@ export default function Page() {
 
       sectionData.images.forEach((image, index) => {
         if (image.file) {
-          formData.append(`images[${index}][file]`, image.file);
+          formData.append(`images`, image.file);
         }
+        formData.append(`images[${index}][title]`, image.title);
         formData.append(`images[${index}][description]`, image.description);
       });
 
@@ -119,19 +127,20 @@ export default function Page() {
           "Content-Type": "multipart/form-data",
         },
       });
-      
-      // const res = await Axios.delete(
-      //   `${url}/${id}`
-      // );
+
       toast.success("Section updated successfully!");
     } catch (error) {
+      console.error(error);
       toast.error("Failed to update section");
     }
   };
 
   return (
     <div className="p-6 w-full mx-auto bg-white shadow-lg rounded-lg">
-      <h1 className="text-2xl font-bold mb-6">Edit Section</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl font-bold mb-6">Edit {page.split("SectionData").join(" section")}</h1>
+        <Button as={Link} href={`/dashboard/pages/${page}`}>Back</Button>
+      </div>
       <form onSubmit={handleSubmit} className="space-y-4 w-full">
         <div>
           <Label htmlFor="title" value="Title" />
@@ -141,7 +150,6 @@ export default function Page() {
             value={sectionData.title || ""}
             onChange={handleChange}
             placeholder="Enter title"
-            required
             className="w-full"
           />
         </div>
@@ -154,43 +162,25 @@ export default function Page() {
             value={sectionData.content || ""}
             onChange={handleChange}
             placeholder="Enter content"
-            required
             className="w-full"
           />
         </div>
 
         <div>
-          <Label htmlFor="order" value="Order" />
-          <TextInput
-            id="order"
-            type="number"
-            name="order"
-            value={sectionData.order || 1}
-            onChange={handleChange}
-            required
+          <Label htmlFor="images" value="Images" />
+          <FileInput
+            id="images"
+            multiple
+            onChange={handleImageChange}
             className="w-full"
           />
-        </div>
-
-        <div>
-          <h2 className="font-semibold">Images</h2>
           {sectionData.images.map((image, index) => (
             <div key={index} className="mt-2 w-full">
-              <Label htmlFor={`image-${index}`} value={`Image ${index + 1}`} />
-
-              {image.url && (
-                <img
-                  src={baseURL + image.url}
-                  alt={`Current image ${index + 1}`}
-                  className="w-40 h-auto mb-2 rounded-lg shadow-md"
-                />
-              )}
-
-              <FileInput
-                id={`image-${index}`}
-                onChange={(e) => handleImageChange(index, e.target.files[0])}
-                required={!image.url}
-                className="w-full"
+              <TextInput
+                placeholder="Image Title"
+                value={image.title || ""}
+                onChange={(e) => handleImageTitleChange(index, e.target.value)}
+                className="w-full mt-2"
               />
 
               <TextInput
@@ -199,14 +189,10 @@ export default function Page() {
                 onChange={(e) =>
                   handleImageDescriptionChange(index, e.target.value)
                 }
-                required
                 className="w-full mt-2"
               />
             </div>
           ))}
-          <Button onClick={addNewImageField} type="button" className="mt-4">
-            Add New Image
-          </Button>
         </div>
 
         <div>
@@ -219,7 +205,6 @@ export default function Page() {
                 onChange={(e) =>
                   handleLinkChange(index, e.target.value, link.url)
                 }
-                required
                 className="w-full"
               />
               <TextInput
@@ -228,7 +213,6 @@ export default function Page() {
                 onChange={(e) =>
                   handleLinkChange(index, link.label, e.target.value)
                 }
-                required
                 className="w-full"
               />
             </div>

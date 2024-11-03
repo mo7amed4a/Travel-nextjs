@@ -32,7 +32,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function PackagesDetailsPage({ params }) {
-  const slug = params.slug;
+  const slug = await params.slug;
 
   let section;
   try {

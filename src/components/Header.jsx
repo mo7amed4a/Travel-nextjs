@@ -1,13 +1,9 @@
 "use client";
 import {
   Avatar,
-  Button,
   Dropdown,
-  Label,
   MegaMenu,
-  Modal,
   Navbar,
-  TextInput,
 } from "flowbite-react";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Context/Usercontext";
@@ -16,6 +12,7 @@ import Link from "next/link";
 import LogoutApp from "./header/logout/logout";
 import DropdownHover from "./DropdownHover";
 import { usePathname } from "next/navigation";
+import SocialHeader from "./header/social";
 
 export default function HeaderApp() {
   const pathname = usePathname();
@@ -26,14 +23,8 @@ export default function HeaderApp() {
     pathname === "/blogs";
   const [ready, setReady] = useState(false);
   const { Userdata } = useContext(UserContext);
-  const [openModal, setOpenModal] = useState(false);
-  const [searchText, setSearchText] = useState("");
 
-  const handleSearch = () => {
-    if (searchText.length >= 1) {
-      window.location.href = `/blogs?search=${searchText}`;
-    }
-  };
+  
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -62,88 +53,7 @@ export default function HeaderApp() {
                 isPathname ? isScrolled ? "text-gray-800" : "md:bg-transparent md:text-white" : ""
               } `}
             >
-              {/* Contact Information */}
-              <ul className="flex gap-x-4 p-4">
-                <li>
-                  <a href="#" className="flex gap-x-1 items-center">
-                    <i className="fas fa-phone-alt"></i>
-                    <span className="hidden md:block">01010101000</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="flex gap-x-1 items-center">
-                    <i className="fas fa-envelope"></i>
-                    <span className="hidden md:block">3m tourism@3m.com</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="flex gap-x-1 items-center">
-                    <i className="fas fa-map-marker-alt"></i>
-                    <span className="hidden md:block">32 nwe cairo</span>
-                  </a>
-                </li>
-              </ul>
-              {/* Social Media Links and Search Modal */}
-              <ul className="flex justify-end gap-x-4 px-4">
-                <li>
-                  <a href="#">
-                    <i className="fab fa-facebook-f"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fab fa-linkedin"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fab fa-twitter"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <i className="fab fa-instagram"></i>
-                  </a>
-                </li>
-                <li className="border-s ps-2">
-                  <a
-                    onClick={() => setOpenModal(!openModal)}
-                    className="fa fa-search cursor-pointer"
-                  ></a>
-                </li>
-              </ul>
-              <Modal
-                dismissible
-                show={openModal}
-                onClose={() => setOpenModal(false)}
-              >
-                <Modal.Header>Search</Modal.Header>
-                <Modal.Body>
-                  <div>
-                    <div className="mb-2 block">
-                      <Label htmlFor="search" value="Search" />
-                    </div>
-                    <TextInput
-                      id="search"
-                      type="search"
-                      placeholder="Search.."
-                      onChange={(e) => setSearchText(e.target.value)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          handleSearch();
-                        }
-                      }}
-                    />
-                  </div>
-                  {searchText}
-                </Modal.Body>
-                <Modal.Footer className="justify-end">
-                  <Button color="gray" onClick={() => setOpenModal(false)}>
-                    Cancel
-                  </Button>
-                  <Button onClick={() => handleSearch()}>Search</Button>
-                </Modal.Footer>
-              </Modal>
+             <SocialHeader />
             </div>
           )}
           {/* Main Navbar */}

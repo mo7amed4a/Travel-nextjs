@@ -2,7 +2,7 @@ import { Axios, baseURL } from "@/lib/api/Axios";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-export default async function DestinationSection() {
+export default async function DestinationSection({dataSection}) {
   
   let data;
   try {
@@ -10,7 +10,6 @@ export default async function DestinationSection() {
   } catch (error) {
     console.error("Error fetching package data:", error);
   }
-
   const {packages} = data?.data?.data;
 
   return (
@@ -23,12 +22,12 @@ export default async function DestinationSection() {
           <div className="flex items-center justify-center sm:justify-start">
             <div className="w-24 bg-primary h-[3px] inline-block"></div>
             <p className="ml-2" style={{ color: "red" }}>
-              POPULAR DESTINATION
+             POPULAR DESTINATION
             </p>
           </div>
 
           <div
-            className="w-[90%] flex flex-col sm:flex-row mb-[50px] text-center sm:text-left items-center sm:items-start"
+            className="w-[90%] flex flex-col md:flex-row mb-[50px] text-center sm:text-left items-center sm:items-start"
             style={{ justifyContent: "space-between" }}
           >
             <h2
@@ -37,13 +36,12 @@ export default async function DestinationSection() {
                 fontSize: "40px",
               }}
             >
-              TOP NOTCH DESTINATION
+              {dataSection?.title}
             </h2>
 
-            <p>
-              Aperiam sociosqu urna praesent, tristique, corrupti <br />{" "}
-              condimentum asperiores platea ipsum ad arcu. Nostrud. Aut <br />{" "}
-              nostrum, ornare quas provident laoreet nesciunt.
+            <p className="lg:w-1/3">
+             {dataSection?.content}
+              
             </p>
           </div>
         </div>

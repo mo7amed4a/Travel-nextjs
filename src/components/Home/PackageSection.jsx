@@ -3,7 +3,7 @@ import { Button } from "flowbite-react";
 import PackageComponent from "@/components/packages/packageComponent";
 import Link from "next/link";
 
-export default async function PackageSection() {
+export default async function PackageSection({packageSectionData}) {
   
   let data;
   try {
@@ -24,12 +24,10 @@ export default async function PackageSection() {
           </p>
         </div>
 
-        <h2 className="text-5xl font-bold mb-4">Popular Packages</h2>
+        <h2 className="text-5xl font-bold mb-4">{packageSectionData?.title}</h2>
 
         <p className="text-lg text-gray-600 max-w-2xl">
-          Mollit voluptatem perspiciatis convallis elementum corporis quo
-          veritatis aliquid blandit, blandit torquent, odit placeat. Adipiscing
-          repudiandae eius cursus? Nostrum magnis maxime curae placeat.
+         {packageSectionData?.content}
         </p>
       </div>
 
