@@ -13,7 +13,7 @@ export default function InquireApp() {
         className="fixed bottom-20 right-10 animate-pulse"
         onClick={() => setOpenModal(true)}
       >
-        <FaQuestionCircle className="text-5xl bg-primary/70 text-white p-3 cursor-pointer rounded-full" />
+        <FaQuestionCircle className="text-5xl bg-primary-500/70 text-white p-3 cursor-pointer rounded-full" />
       </div>
       <Modal
         dismissible

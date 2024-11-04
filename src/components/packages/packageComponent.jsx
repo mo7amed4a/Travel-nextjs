@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function PackageComponent({ packageItem }) {
   return (
-    <div className="flex flex-col justify-between">
+    <div className="flex flex-col justify-between h-full">
       <figure className="w-full relative">
         {packageItem?.typePackages?.length > 0 && <div className="absolute top-[20px] end-0 bg-primary-500 p-1.5 text-white">
           <h6 className="text-sm">
@@ -26,11 +26,11 @@ export default function PackageComponent({ packageItem }) {
             <img
               src={"/images/img17.jpg"}
               alt="destination"
-              className="w-full h-80"
+              className="w-full h-72"
             />
           )}
         </Link>
-        <div className="mx-1 absolute top-[93%] left-[0.5%] right-[0.5%] z-10 px-2 py-3 bg-secondary-500 text-white text-xs">
+        <div className="mx-1 absolute top-[93%] left-[0.5%] right-[0.5%] z-10 px-2 py-3 bg-secondary-500 text-white text-[10px] sm:text-xs">
           <ul className="grid grid-cols-12 [&>li>i]:pe-2 [&>li]:ps-2 divide-x">
             <li className="flex items-center col-span-3">
               <i className="far fa-clock"></i>
