@@ -93,7 +93,7 @@ export default function AddLocation() {
 
                       <button
                         type="submit"
-                        className="mt-2 bg-blue-500 text-white p-2 rounded text-sm"
+                        className="mt-2 bg-secondary-500 text-white p-2 rounded text-sm"
                       >
                         Add Location
                       </button>

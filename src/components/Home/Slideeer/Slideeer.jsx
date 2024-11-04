@@ -53,7 +53,7 @@ const Slideeer = () => {
                 </div>
                 {/* تنسيق النصوص */}
                 <p className="text-gray-700 text-lg italic mt-6">{testimonial.quote}</p>
-                <h3 className="text-blue-600 font-bold text-2xl mt-4">{testimonial.name}</h3> 
+                <h3 className="text-secondary-600 font-bold text-2xl mt-4">{testimonial.name}</h3> 
                 <span className="text-gray-500 text-sm">{testimonial.profession}</span> 
               </div>
             </div>

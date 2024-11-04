@@ -399,7 +399,7 @@ export default function PackageEdit() {
                               description: "",
                             })
                           }
-                          className="mt-2 text-blue-500 hover:text-blue-700"
+                          className="mt-2 text-secondary-500 hover:text-secondary-700"
                         >
                           Add Program Item
                         </button>
@@ -444,7 +444,7 @@ export default function PackageEdit() {
 
                   <button
                     type="submit"
-                    className="mt-4 bg-blue-500 text-white p-2 rounded"
+                    className="mt-4 bg-secondary-500 text-white p-2 rounded"
                   >
                     Submit
                   </button>

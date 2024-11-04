@@ -131,13 +131,13 @@ export default function ResetPasswordPage() {
         <div className="flex justify-center py-4">
           <button
             type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            className="bg-secondary-500 text-white px-4 py-2 rounded hover:bg-secondary-600"
           >
             Reset Password
           </button>
         </div>
       </form>
-      <div className="flex justify-between w-full text-secondary text-xs md:text-base">
+      <div className="flex justify-between w-full text-secondary-500 text-xs md:text-base">
         <Link href={"/auth/login"}>Do you want to login?</Link>
         <Link href="/auth/signup">You don't have an account?</Link>
       </div>

@@ -78,7 +78,7 @@ export default function OtpPage() {
         <div className="flex justify-center py-4">
           <button
             type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            className="bg-secondary-500 text-white px-4 py-2 rounded hover:bg-secondary-600"
           >
             Send OTP
           </button>
@@ -87,7 +87,7 @@ export default function OtpPage() {
         {/* Login Redirect */}
         <p className="text-center text-xs md:text-base">
           Already have an account?{" "}
-          <Link href="/auth/login" className="text-blue-500">
+          <Link href="/auth/login" className="text-secondary-500">
             Login here
           </Link>
         </p>

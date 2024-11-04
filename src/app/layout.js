@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
   const customTheme = {
     button: {
       color: {
-        primary: "bg-primary hover:bg-primary text-white font-bold",
+        primary: "bg-primary-500 hover:bg-primary-500 text-white font-bold",
       },
     },
   };

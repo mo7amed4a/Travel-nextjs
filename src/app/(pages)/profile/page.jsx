@@ -190,7 +190,7 @@ export default function ProfilePage() {
                   </label>
                   <Field
                     name="firstName"
-                    className="mt-1 p-2 block w-full rounded-md border border-secondary shadow-sm focus:border-secondary focus:ring-secondary"
+                    className="mt-1 p-2 block w-full rounded-md border border-secondary-500 shadow-sm focus:border-secondary-500 focus:ring-secondary"
                   />
                   {errors.firstName && touched.firstName ? (
                     <div className="text-red-500">{errors.firstName}</div>
@@ -205,7 +205,7 @@ export default function ProfilePage() {
                   </label>
                   <Field
                     name="lastName"
-                    className="mt-1 p-2 block w-full rounded-md border border-secondary shadow-sm focus:border-secondary focus:ring-secondary"
+                    className="mt-1 p-2 block w-full rounded-md border border-secondary-500 shadow-sm focus:border-secondary-500 focus:ring-secondary"
                     />
                   {errors.lastName && touched.lastName ? (
                     <div className="text-red-500">{errors.lastName}</div>

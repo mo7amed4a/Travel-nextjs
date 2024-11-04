@@ -35,8 +35,8 @@ export default function NavbarAdmin({ setAsideToggle }) {
             placeholder="Search Now"
           />
         </div> */}
-          <Link href={'/dashboard/faqs/answer'} className="relative hover:text-secondary hover:bg-gray-300 py-2 px-4 rounded-none">
-            {faqLength > 0 && <span className="absolute top-0.5 right-2 z-10 text-white bg-primary rounded-full px-1.5 text-[10px] font-bold py-0.5">
+          <Link href={'/dashboard/faqs/answer'} className="relative hover:text-secondary-500 hover:bg-gray-300 py-2 px-4 rounded-none">
+            {faqLength > 0 && <span className="absolute top-0.5 right-2 z-10 text-white bg-primary-500 rounded-full px-1.5 text-[10px] font-bold py-0.5">
               {faqLength}
             </span>
             }
@@ -47,8 +47,8 @@ export default function NavbarAdmin({ setAsideToggle }) {
           inline
           className="w-64"
           label={
-            <div className="relative hover:text-secondary hover:bg-gray-300 py-2 px-4 rounded-none">
-              <span className="absolute top-0.5 right-2 z-10 text-white bg-primary rounded-full px-1.5 text-[10px] font-bold py-0.5">
+            <div className="relative hover:text-secondary-500 hover:bg-gray-300 py-2 px-4 rounded-none">
+              <span className="absolute top-0.5 right-2 z-10 text-white bg-primary-500 rounded-full px-1.5 text-[10px] font-bold py-0.5">
                 3
               </span>
               <i className="far fa-envelope text-4xl" aria-hidden="true"></i>
@@ -78,8 +78,8 @@ export default function NavbarAdmin({ setAsideToggle }) {
           inline
           className="w-64"
           label={
-            <div className="relative hover:text-secondary hover:bg-gray-300 py-2 px-4 rounded-none">
-              <span className="absolute top-0.5 right-2 z-10 text-white bg-primary rounded-full px-1.5 text-[10px] font-bold py-0.5">
+            <div className="relative hover:text-secondary-500 hover:bg-gray-300 py-2 px-4 rounded-none">
+              <span className="absolute top-0.5 right-2 z-10 text-white bg-primary-500 rounded-full px-1.5 text-[10px] font-bold py-0.5">
                 3
               </span>
               <i className="far fa-bell text-4xl" aria-hidden="true"></i>

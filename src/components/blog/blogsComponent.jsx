@@ -31,7 +31,7 @@ export default function BlogComponentApp({ article }) {
         </p>
         <Link
           href={`/blogs/${article.slug}`}
-          className="text-secondary font-semibold"
+          className="text-secondary-500 font-semibold"
         >
           CONTINUE READING...
         </Link>

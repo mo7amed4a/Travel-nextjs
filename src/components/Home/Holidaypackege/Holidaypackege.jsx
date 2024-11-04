@@ -27,7 +27,7 @@ export default function Holidaypackage() {
                 type="text"
                 placeholder="Enter your details"
               />
-              <button className='bg-primary text-white px-3.5 py-2.5 absolute right-[10px] top-[8px]'>
+              <button className='bg-primary-500 text-white px-3.5 py-2.5 absolute right-[10px] top-[8px]'>
                 SIGN UP NOW!
               </button>
             </form>

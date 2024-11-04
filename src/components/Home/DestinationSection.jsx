@@ -16,11 +16,11 @@ export default async function DestinationSection({dataSection}) {
     <>
       <div
         className="container mx-auto overflow-x-hidden"
-        style={{ marginTop: "200px" }}
+        style={{ marginTop: "50px" }}
       >
         <div>
           <div className="flex items-center justify-center sm:justify-start">
-            <div className="w-24 bg-primary h-[3px] inline-block"></div>
+            <div className="w-24 bg-primary-500 h-[3px] inline-block"></div>
             <p className="ml-2" style={{ color: "red" }}>
              POPULAR DESTINATION
             </p>
@@ -65,7 +65,7 @@ export default async function DestinationSection({dataSection}) {
     {/* الطبقة الشفافة الداكنة */}
     <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
     <div className="p-4 relative z-10">
-    <span className="bg-blue-600 text-white px-2 py-1 rounded capitalize">
+    <span className="bg-secondary-600 text-white px-2 py-1 rounded capitalize">
       {item?.location?.split('-')[0]}
     </span>
     <h3 className="mt-2 text-lg font-semibold">{item?.location?.split('-')?.length > 1 && packages[0]?.location?.split('-')[1]}</h3>
@@ -80,7 +80,7 @@ export default async function DestinationSection({dataSection}) {
       </div>
 
       <div className=" flex  justify-center text-center mt-6">
-        <button className="bg-primary text-white  px-3.5 py-2.5">
+        <button className="bg-primary-500 text-white  px-3.5 py-2.5">
           MORE DESTINATION
         </button>
       </div>

@@ -39,7 +39,7 @@ export default function DashboardPage() {
     <main className="w-full py-5 space-y-5">
       <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-4">
         <div className="bg-white shadow flex h-20">
-          <div className="bg-blue-500 w-20 h-full flex items-center justify-center text-white">
+          <div className="bg-secondary-500 w-20 h-full flex items-center justify-center text-white">
             <i className="text-4xl far fa-chart-bar"></i>
           </div>
           <div className="px-4 flex flex-col items-start justify-center">

@@ -5,8 +5,8 @@ const GalleryPage = () => {
         <div className="my-10 gap-8 flex items-center justify-center flex-wrap px-4 mx-auto container">
      <div className="flex flex-col text-center md:text-left items-center md:items-start">
     <div className="flex items-center justify-center md:justify-start mb-4">
-        <div className="w-16 bg-primary h-[2px] inline-block"></div>
-        <p className="ml-2 text-primary uppercase font-bold text-sm tracking-widest">Our Tour Gallery</p>
+        <div className="w-16 bg-primary-500 h-[2px] inline-block"></div>
+        <p className="ml-2 text-primary-500 uppercase font-bold text-sm tracking-widest">Our Tour Gallery</p>
     </div>
 
     <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4">

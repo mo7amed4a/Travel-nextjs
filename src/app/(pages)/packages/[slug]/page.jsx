@@ -92,7 +92,7 @@ export default async function PackagesDetailsPage({ params }) {
                     }}
                   />
                 ))}
-              <div className="absolute top-[93%] inset-x-0 z-10 py-3 bg-secondary text-white text-sm flex justify-center items-center">
+              <div className="absolute top-[93%] inset-x-0 z-10 py-3 bg-secondary-500 text-white text-sm flex justify-center items-center">
                 <ul className="flex justify-between [&>li>i]:pe-2 [&>li]:ps-4 divide-x gap-x-4">
                   <li>
                     <i className="far fa-clock"></i>
@@ -117,8 +117,8 @@ export default async function PackagesDetailsPage({ params }) {
         <div className="md:col-span-2 relative">
           <div className="sticky top-40 space-y-10">
             {item?.typePackages?.length > 0 && (
-              <div className="bg-primary py-5 flex flex-col justify-center items-center space-y-3 text-white">
-                <div className=" bg-primary p-1.5 text-white">
+              <div className="bg-primary-500 py-5 flex flex-col justify-center items-center space-y-3 text-white">
+                <div className=" bg-primary-500 p-1.5 text-white">
                   <h3>
                     <span className="text-2xl font-bold">
                       $

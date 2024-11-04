@@ -11,7 +11,7 @@ import PackageSection from "@/components/Home/PackageSection";
 import { Axios } from "@/lib/api/Axios";
 
 export default async function Home() {
-   
+
   let slider;
   try {
     slider = await Axios.get(`/pages/slider/sections`);
@@ -44,16 +44,16 @@ export default async function Home() {
   }
   blogSectionData = blogSectionData?.data?.data?.sections[0];
 
-    return (
-        <div className="-mt-28 md:-mt-40">
-             <SliderApp slides={slider?.images}/>
-             <DestinationSection dataSection={destination}/>
-            <PackageSection packageSectionData={packageSectionData}/>
-        <TravelSection/>
-        <TravelofferSection/>
-        <GalleryPage />
-         <Resentpostes blogSectionData={blogSectionData}/>
-        {/* <Holidaypackage/> */}
-        </div>
-    );
+  return (
+    <div className="md:-mt-40">
+      <SliderApp slides={slider?.images} />
+      <DestinationSection dataSection={destination} />
+      <PackageSection packageSectionData={packageSectionData} />
+      <TravelSection />
+      <TravelofferSection />
+      <GalleryPage />
+      <Resentpostes blogSectionData={blogSectionData} />
+      {/* <Holidaypackage/> */}
+    </div>
+  );
 }

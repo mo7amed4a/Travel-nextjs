@@ -51,7 +51,7 @@ export default function BookingForm({id}) {
   };
   return (
     <div className="bg-gray-100 p-4 space-y-4">
-      <div className="bg-secondary text-center p-5 text-white text-xl font-semibold">
+      <div className="bg-secondary-500 text-center p-5 text-white text-xl font-semibold">
         Booking
       </div>
 
@@ -186,7 +186,7 @@ export default function BookingForm({id}) {
             </div>
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded"
+              className="w-full bg-secondary-500 text-white py-2 rounded"
             >
               Book Now
             </button>

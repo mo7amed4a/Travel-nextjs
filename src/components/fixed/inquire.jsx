@@ -25,7 +25,7 @@ export default function InquireApp() {
         <Modal.Header />
         <Modal.Body>
           <div>
-            <h1 className="font-bold text-primary pb-2">
+            <h1 className="font-bold text-primary-500 pb-2">
               STILL HAVE A QUESTION?
             </h1>
             <FaqForm />

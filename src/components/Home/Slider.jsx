@@ -21,7 +21,7 @@ export default async function SliderApp({
   return (
     <div
       className={`relative ${
-        size === "small" ? "h-full" : "h-[75vh] md:h-[95vh]"
+        size === "small" ? "h-full" : "h-[50vh]  md:h-[95vh]"
       } `}
     >
       <Carousel {...props}>
@@ -37,7 +37,7 @@ export default async function SliderApp({
                   </span>
                 </h1>
                 <p className="text-white md:text-2xl mb-9 w-5/6 md:w-2/3">{slide.description}</p>
-                <button className="bg-sky-700 text-white px-8 py-3 hover:bg-sky-900">
+                <button className="bg-primary-700 text-white text-sm md:text-base px-4 md:px-8 py-1.5 md:py-3 hover:bg-primary-900">
                   CONTINUE READING
                 </button>
               </div>

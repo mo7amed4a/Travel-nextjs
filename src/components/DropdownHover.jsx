@@ -55,7 +55,7 @@ const DropdownHover = () => {
     <div className="relative inline-block text-start dropdown">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full text-start block py-2 pl-3 pr-4 md:p-0 border-b border-gray-100 text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:hover:bg-transparent md:hover:text-cyan-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
+        className="w-full text-start block py-2 pl-3 pr-4 md:p-0 border-b border-gray-100 text-gray-700 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:hover:bg-transparent md:hover:text-secondary-700 md:dark:hover:bg-transparent md:dark:hover:text-white"
       >
         DESTINATIONS
       </button>
@@ -75,7 +75,7 @@ const DropdownHover = () => {
               onMouseEnter={() => setHoveredCountry(country.country)}
               onMouseLeave={() => setHoveredCountry(null)}
             >
-              <button className="block w-full text-left px-4 py-2 text-sm bg-primary rounded-full my-1 text-white hover:bg-yellow-300">
+              <button className="block w-full text-left px-4 py-2 text-sm bg-primary-500 rounded-full my-1 text-white hover:bg-yellow-300">
                 {country.country}
               </button>
 
@@ -94,7 +94,7 @@ const DropdownHover = () => {
                       onMouseEnter={() => setHoveredSubMenu(submenu)}
                       onMouseLeave={() => setHoveredSubMenu(null)}
                     >
-                      <button className="block w-full text-left px-4 py-2 text-sm bg-primary rounded-full my-1 text-white hover:bg-yellow-300">
+                      <button className="block w-full text-left px-4 py-2 text-sm bg-primary-500 rounded-full my-1 text-white hover:bg-yellow-300">
                         {submenu}
                       </button>
 
@@ -109,7 +109,7 @@ const DropdownHover = () => {
                           {categories.map((category) => (
                             <div
                               key={category}
-                              className="cursor-pointer bg-primary rounded-full my-1 text-white hover:bg-yellow-300 px-4 py-2"
+                              className="cursor-pointer bg-primary-500 rounded-full my-1 text-white hover:bg-yellow-300 px-4 py-2"
                               onClick={() =>
                                 handleCategoryClick(country.country, submenu, category)
                               }

@@ -134,7 +134,7 @@ export default function TableBooking({
                           //     className={`${
                           //       value
                           //         ? "text-primary"
-                          //         : "text-primary text-opacity-15"
+                          //         : "text-primary-500 text-opacity-15"
                           //     } w-6 h-6`}
                           //     viewBox="0 0 32 32"
                           //     style={{
@@ -211,7 +211,7 @@ export default function TableBooking({
                           <span>{formatISODate(value)}</span>
                         ) : key === "email" ? (
                           <a
-                            className="hover:text-primary hover:underline"
+                            className="hover:text-primary-500 hover:underline"
                             href={`mailto:${value}`}
                           >
                             {value}
@@ -302,7 +302,7 @@ export default function TableBooking({
                 ) : modalDataKey === "packageId" ? (
                   <Table.Row>
                     <Table.Cell className="font-medium w-screen">
-                      <Link className="text-secondary text-xl hover:underline" href={`/packages/${modalData.slug}`} >Show Package</Link>
+                      <Link className="text-secondary-500 text-xl hover:underline" href={`/packages/${modalData.slug}`} >Show Package</Link>
                     </Table.Cell>
                   </Table.Row>
                 ) : typeof modalData === "string" ? (
@@ -312,7 +312,7 @@ export default function TableBooking({
                 ) : (
                   Object.entries(modalData).map(([key, value], index) => (
                     <Table.Row key={index}>
-                      <Table.Cell className="text-primary font-bold">
+                      <Table.Cell className="text-primary-500 font-bold">
                         {isNaN(key) ? key : parseInt(key) + 1}
                       </Table.Cell>
                       <Table.Cell>

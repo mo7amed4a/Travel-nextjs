@@ -113,13 +113,13 @@ export default function LoginPage() {
                 <div className="w-full pt-2 flex justify-center">
                     <button
                         type="submit"
-                        className="py-3 px-4 bg-secondary w-full text-center text-white font-semibold hover:bg-secondary/90 duration-100"
+                        className="py-3 px-4 bg-secondary-500 w-full text-center text-white font-semibold hover:bg-secondary/90 duration-100"
                     >
                         Login
                     </button>
                 </div>
 
-                <div className="flex justify-between w-full text-secondary text-xs md:text-base">
+                <div className="flex justify-between w-full text-secondary-500 text-xs md:text-base">
                     <Link href="/auth/signup">You don't have an account?</Link>
                     <Link href="/auth/forgot-password">Forgot Password?</Link>
                 </div>

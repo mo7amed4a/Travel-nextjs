@@ -43,14 +43,14 @@ export default function HeaderApp() {
         <MegaMenu
           className={`text-white p-0 fixed top-0 inset-x-0  ${
             isScrolled
-              ? "bg-white z-50 shadow"
-              : `${isPathname ? "md:bg-transparent" : ""}`
+              ? "bg-secondary-500 z-50 shadow"
+              : `${isPathname ? "bg-secondary-500 xl:bg-transparent" : "bg-secondary-500"}`
           }`}
         >
           {true && (
             <div
-              className={`container-app flex justify-between items-center text-gray-800 bg-white ${
-                isPathname ? isScrolled ? "text-gray-800" : "md:bg-transparent md:text-white" : ""
+              className={`container-app flex justify-between items-center  ${
+                isPathname && "lg:bg-transparent lg:text-white"
               } `}
             >
              <SocialHeader />
@@ -58,12 +58,12 @@ export default function HeaderApp() {
           )}
           {/* Main Navbar */}
           <div
-            className={`flex container-app flex-wrap items-center justify-between py-4 md:gap-x-8`}
+            className={`flex container-app flex-wrap items-center justify-between py-4 lg:gap-x-8`}
           >
             <Navbar.Brand as={Link} href="/">
               <img
                 alt=""
-                src="/images/logoapp2.png"
+                src="/images/logoapp3.png"
                 className="mr-3 h-6 sm:h-9"
               />
             </Navbar.Brand>
@@ -132,15 +132,9 @@ export default function HeaderApp() {
               <Navbar.Toggle />
             </div>
             <Navbar.Collapse
-              className={`[&>ul]:space-x-0 [&>ul]:gap-x-4 [&>*>*>*]:uppercase [&>*>*>*]:font-bold bg-white md:bg-transparent ${
-                isScrolled
-                  ? "[&>*>*>*>a]:text-black [&>*>*>*]:text-black "
-                  : `[&>*>*>*>a]:text-black [&>*>*>*]:text-black  ${
-                      isPathname
-                        ? "md:[&>*>*>*>a]:text-white md:[&>*>*>*]:text-white"
-                        : ""
-                    }`
-              }`}
+              className={`[&>ul]:space-x-0 [&>ul]:gap-x-4 [&>*>*>*]:uppercase [&>*>*>*]:font-bold bg-secondary-500 md:bg-transparent 
+                 [&>*>*>*>a]:text-white [&>*>*>*]:text-white`
+            }
             >
               <Navbar.Link as={Link} href="/">
                 Home

@@ -183,12 +183,12 @@ export default function SignUpPage() {
         <div className="flex justify-center py-4">
           <button
             type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            className="bg-secondary-500 text-white px-4 py-2 rounded hover:bg-secondary-600"
           >
             Sign Up
           </button>
         </div>
-        <div className="flex justify-between w-full text-secondary text-xs md:text-base">
+        <div className="flex justify-between w-full text-secondary-500 text-xs md:text-base">
           <Link href="/auth/forgot-password">Forgot Password?</Link>
           <Link href={"/auth/login"}>Already have an account?</Link>
         </div>

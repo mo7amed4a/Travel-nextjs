@@ -44,7 +44,7 @@ export default function TravelSection() {
     <div className="my-20">
     <section className="flex flex-col justify-center items-center space-y-4">
           <h3 className="flex items-center text-lg font-bold text-primary">
-            <span className="w-20 h-0.5 inline-block bg-primary me-2"></span>TRAVEL
+            <span className="w-20 h-0.5 inline-block bg-primary-500 me-2"></span>TRAVEL
             BY ACTIVITY
           </h3>
           <h1 className="text-3xl font-bold">ADVENTURE & ACTIVITY</h1>

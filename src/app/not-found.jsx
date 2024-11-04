@@ -5,10 +5,10 @@ export default function NotFoundPage() {
     // <div className='flex justify-center items-center w-full'>
     //   <div className={`h-screen  flex justify-center items-center w-full`}>
     //     <div className='relative text-center md:text-start w-full md:w-auto'>
-    //         <h6 className='text-[150px] md:text-[240px] font-bold text-secondary text-opacity-35'>404</h6>
-    //         <p className='w-full -mt-10 md:mt-0 xl:w-[160%] md:absolute md:-left-5 md:top-2/4 text-secondary font-bold text-xl md:text-3xl'>Oops! That page can't be found</p>
+    //         <h6 className='text-[150px] md:text-[240px] font-bold text-secondary-500 text-opacity-35'>404</h6>
+    //         <p className='w-full -mt-10 md:mt-0 xl:w-[160%] md:absolute md:-left-5 md:top-2/4 text-secondary-500 font-bold text-xl md:text-3xl'>Oops! That page can't be found</p>
     //         <div className='text-center md:-mt-8'>
-    //             <Link href='/' className='text-primary hover:underline font-bold'>Go to home page</Link>
+    //             <Link href='/' className='text-primary-500 hover:underline font-bold'>Go to home page</Link>
     //         </div>
     //     </div>
     //   </div>
@@ -176,7 +176,7 @@ export default function NotFoundPage() {
       </p>
       <Link
         href="/"
-        className="flex items-center space-x-2 bg-primary text-gray-100 px-4 py-2 mt-12 rounded transition duration-150"
+        className="flex items-center space-x-2 bg-primary-500 text-gray-100 px-4 py-2 mt-12 rounded transition duration-150"
         title="Return Home"
       >
         <svg

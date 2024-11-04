@@ -193,7 +193,7 @@ export default function SectionComponents() {
                 <Button
                   type="button"
                   onClick={addLinkField}
-                  className="w-full py-2 bg-blue-500 text-white"
+                  className="w-full py-2 bg-secondary-500 text-white"
                 >
                   Add Another Link
                 </Button>

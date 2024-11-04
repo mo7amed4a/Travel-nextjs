@@ -31,7 +31,7 @@ export function TabForPackageDetail({ packageData }) {
           <div className="space-y-3">
             {packageData.program.programItem.map((pItem, index) => (
               <div key={index} className="flex items-center">
-                <span className="min-w-16 h-16 relative z-10 rounded-full text-white text-lg bg-primary flex flex-col -space-y-2 items-center justify-center">
+                <span className="min-w-16 h-16 relative z-10 rounded-full text-white text-lg bg-primary-500 flex flex-col -space-y-2 items-center justify-center">
                   {/* TODO : remove day and replace_oh b title day  */}
                   <small>day</small>
                   <b>{index + 1}</b>

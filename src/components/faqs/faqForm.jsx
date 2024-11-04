@@ -111,7 +111,7 @@ export default function FaqForm() {
     <div className="flex justify-start">
       <button
         type="submit"
-        className="bg-primary text-white inline-block font-bold p-3 cursor-pointer"
+        className="bg-primary-500 text-white inline-block font-bold p-3 cursor-pointer"
       >SUBMIT QUESTIONS</button>
     </div>
   </form>

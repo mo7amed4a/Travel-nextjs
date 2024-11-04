@@ -13,7 +13,7 @@ export default function layout({ children }) {
         <div className="absolute top-4 start-4">
           <Link
             href="/"
-            className="text-secondary font-bold md:text-lg hover:underline"
+            className="text-secondary-500 font-bold md:text-lg hover:underline"
           >
             Home
           </Link>

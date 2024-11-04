@@ -30,11 +30,11 @@ export default async function FooterApp() {
 
 
   return (
-    <Footer bgDark container className="rounded-none mt-10">
+    <Footer bgDark container className="rounded-none mt-10 bg-secondary-500">
       <div className="w-full text-center container-app">
         <div className="w-full justify-between sm:flex items-start sm:justify-between space-y-10 md:space-y-0">
           <div className="text-white text-start space-y-4 w-full">
-            <h1 className="font-bold border-s-4 border-s-secondary ps-2">
+            <h1 className="font-bold border-s-4 border-s-secondary-500 ps-2">
               About Travel
             </h1>
             <p className="w-5/6 text-sm">
@@ -42,7 +42,7 @@ export default async function FooterApp() {
             </p>
           </div>
           <div className="text-white text-start space-y-4 w-full">
-            <h1 className="font-bold border-s-4 border-s-secondary ps-2">
+            <h1 className="font-bold border-s-4 border-s-secondary-500 ps-2">
               CONTACT INFORMATION
             </h1>
             <p className="w-5/6 text-sm">click to contact us</p>
@@ -76,7 +76,7 @@ export default async function FooterApp() {
             </ul>
           </div>
           <div className="text-white text-start space-y-4 w-full">
-            <h1 className="font-bold border-s-4 border-s-secondary ps-2">
+            <h1 className="font-bold border-s-4 border-s-secondary-500 ps-2">
               Latest Post
             </h1>
             <div className="space-y-4">
@@ -100,7 +100,7 @@ export default async function FooterApp() {
             name="Flowbite"
           /> */}
           <div className="text-white text-start space-y-4 w-full">
-            <h1 className="font-bold border-s-4 border-s-secondary ps-2">
+            <h1 className="font-bold border-s-4 border-s-secondary-500 ps-2">
               SUBSCRIBE US
             </h1>
             <p className="w-5/6 text-sm">send your email for news</p>
@@ -120,7 +120,7 @@ export default async function FooterApp() {
                 className="rounded-none w-full text-black"
                 required
               />
-              <button className="rounded-none bg-primary hover:bg-primary/95 w-full py-3 mt-4">
+              <button className="rounded-none bg-primary-500 hover:bg-primary/95 w-full py-3 mt-4">
                 SUBSCRIBE NOW
               </button>
             </form>
